@@ -2,3 +2,5 @@
 env/
 p13-1.png
 p13-2.png
+__pycache__
+db.sqlite3
