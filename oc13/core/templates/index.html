@@ -10,5 +10,12 @@
             </div>
           </div>
     </section>
+    <section>
+      {% if request.user.is_authenticated %}
+      <p>Connecté en tant que : {{request.user.username}} | <a href="{% url 'registration:logout' %}">Logout</a></p>
+      {% else %}
+      <p><a href="{% url 'registration:register' %}">S'enregistrer</a> | <a href="{% url 'registration:login' %}">Login</a></p>
+      {% endif %}
+    </section>
 
 {% endblock %}
