@@ -18,7 +18,18 @@
 </head>
 
 <body id="page-top">
-  <p>Body</p>
+    {% if request.user.is_authenticated %}
+    <p><a href="{% url 'core:index' %}">Home</a> |
+       <a href="{% url 'registration:account' %}">Compte</a> |
+       <a href="{% url 'registration:logout' %}">Se deconnecter</a> |</p>
+      <p>Connecté en tant que : {{request.user.username}}</p>
+      {% else %}
+    <p><a href="{% url 'core:index' %}">Home</a> |
+       <a href="{% url 'registration:register' %}">S'enregistrer</a> |
+       <a href="{% url 'registration:login' %}">Se connecter</a></p>
+      {% endif %}
+
+  <h2>Body</h2>
 
   {% block content %}{% endblock %}
 
