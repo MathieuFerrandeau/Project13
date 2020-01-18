@@ -21,6 +21,7 @@
     {% if request.user.is_authenticated %}
     <p><a href="{% url 'core:index' %}">Home</a> |
        <a href="{% url 'registration:account' %}">Compte</a> |
+       <a href="{% url 'password_change' %}">Modifier son mot de passe</a> |
        <a href="{% url 'registration:logout' %}">Se deconnecter</a> |</p>
       <p>Connecté en tant que : {{request.user.username}}</p>
       {% else %}
