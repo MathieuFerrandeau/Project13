@@ -31,5 +31,14 @@ class RegistrationViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_account(self):
+        self.client.login(username='user', password='password')
         response = self.client.get(reverse('registration:account'))
         self.assertEqual(response.status_code, 302)
+
+    def test_password_reset(self):
+        response = self.client.post(reverse('password_reset'),
+                                    {'email': 'test@mail.fr'}, follow=True)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(response, reverse('password_reset_done'))
+
