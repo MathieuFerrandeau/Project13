@@ -2,6 +2,7 @@
 env/
 p13-1.png
 p13-2.png
-__pycache__/
+__pycache__
 db.sqlite3
-registration/__pycache__/urls.cpython-36.pyc
+.coverage
+oc13/htmlcov

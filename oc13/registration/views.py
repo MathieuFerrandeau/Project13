@@ -40,7 +40,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)  # check if data is correct
             if user:  # if the returned object is not None
                 login(request, user)  # connect the user
-                return render(request, 'index.html')
+                return render(request, 'core/index.html')
             else:  # otherwise an error will be displayed
                 error = True
     else:
