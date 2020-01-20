@@ -7,3 +7,7 @@ def index(request):
     """index view"""
     template = loader.get_template('core/index.html')
     return HttpResponse(template.render(request=request))
+
+def credits(request):
+    """credits view"""
+    return render(request, 'core/credits.html')
