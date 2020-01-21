@@ -9,4 +9,4 @@ class CoreViewsTests(TestCase):
         html = response.content.decode('utf8')
 
         self.assertEqual(response.status_code, 200)
-        self.assertInHTML('<h2 class="section-heading">INDEX</h2>', html)
+        self.assertInHTML(' <hr class="divider my-4">', html)

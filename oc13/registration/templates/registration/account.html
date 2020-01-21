@@ -1,18 +1,10 @@
 {% extends "core/base.html" %}
 {% block content %}
 <header class="smallheader text-center text-white d-flex">
-    <div class="container my-auto">
-        <div class="row">
-            <div class="col-lg-10 mx-auto">
-                <h1 class="text-uppercase">
-                    <strong>Profil de : {{ user.username }}</strong>
-                </h1>
-            </div>
-        </div>
-    </div>
 </header>
 <section class="text-center d-flex">
     <div class="container my-auto">
+        <h1 class="text-uppercase"><strong>{{ user.username }}</strong></h1><br>
     <form method="post">{% csrf_token %}
         <fieldset class="form-group">
                 <h3 class="border-bottom mb-3">Vos informations:</h3>
@@ -38,11 +30,18 @@
                 <p>{{user_form.non_field_errors}}</p>
             </div>
         {% endif %}
+
+        <div>
+            <a href="{% url 'password_change' %}"><strong>Modifiez votre mot de passe</strong></a>
+
+        </div><br>
+
         <div class="form-group">
                 <button class="btn btn-primary btn-xl mt-50" type="submit">Sauvegarder les changements</button>
             </div>
 
     </form>
         </div>
+
 </section>
 {% endblock content %}
