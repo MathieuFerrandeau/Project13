@@ -43,13 +43,13 @@
           {% if user.is_authenticated %}
 
           <li class="nav-item icon">
-            <a href="/"> <i class="fas fa-history fa-2x" data-toggle="tooltip" title="Mon historique de dépenses"></i></a>
+            <a href="{% url 'spent:expense_history' %}"> <i class="fas fa-history fa-2x" data-toggle="tooltip" title="Mon historique de dépenses"></i></a>
           </li>
           <li class="nav-item icon">
-            <a href="/"> <i class="fas fa-file-invoice-dollar fa-2x" data-toggle="tooltip" title="Mes factures"></i></a>
+            <a href="{% url 'spent:bills' %}"> <i class="fas fa-file-invoice-dollar fa-2x" data-toggle="tooltip" title="Mes factures"></i></a>
           </li>
           <li class="nav-item icon">
-            <a href="/"> <i class="fas fa-plus fa-2x" data-toggle="tooltip" title="Dépenses à saisir"></i></a>
+            <a href="{% url 'spent:record_expenses' %}"> <i class="fas fa-plus fa-2x" data-toggle="tooltip" title="Dépenses à saisir"></i></a>
           </li>
           <li class="nav-item icon">
              <a href="{% url 'registration:account' %}"> <i class="fas fa-user-edit fa-2x" data-toggle="tooltip" title="Mon Profile" ></i></a>
