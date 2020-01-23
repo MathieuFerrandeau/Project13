@@ -10,8 +10,8 @@ class Outlay(models.Model):
     """Outlay table"""
     name = models.CharField(max_length=200, unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="outlay")
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    payment_method = models.CharField(max_length=15)
+    amount = models.DecimalField(null=True, blank=True, max_digits=10, decimal_places=2)
+    payment_method = models.CharField(null=True, blank=True, max_length=15)
     payment_date = models.DateField(null=True, blank=True)
     creation_date = models.DateField(null=True, blank=True)
 

@@ -1,0 +1,168 @@
+{
+  "categories": [
+    {
+      "Logement": [
+
+        "Loyer",
+        "Electricité",
+        "Assurance habitation",
+        "Charges diverses",
+        "décoration",
+        "Entretiens",
+        "Gaz",
+        "Eau",
+        "jardin",
+        "Autres"
+      ]
+    },
+    {
+      "Scolarité & Enfants": [
+        "Jouets",
+        "Pensions",
+        "Baby-sitters & Crèches",
+        "Fournitures scolaire",
+        "Logmeent étudiant",
+        "Pensions",
+        "Prêt étudiant",
+        "Autres"
+      ]
+    },
+    {
+      "Alimentation & Restau": [
+        "Supermarché / Épicerie",
+        "Fast foods",
+        "Restaurants",
+        "Cafés / Terasses",
+        "Autres"
+      ]
+    },
+    {
+      "Abonnements": [
+        "Internet",
+        "Téléphonie mobile",
+        "Télephonie fixe",
+        "Câble / Satellite",
+        "Autres"
+      ]
+    },
+    {
+      "Retraits, Chèques et Virements": [
+        "Chèques",
+        "Retraits",
+        "Virements",
+        "Virements internes",
+        "Autres"
+      ]
+    },
+    {
+      "Banque": [
+        "Frais bancaires",
+        "Remboursement emprunt",
+        "Hypothèque",
+        "Autres"
+      ]
+    },
+    {
+      "Achats & Shopping": [
+        "Articles de sport",
+        "Cadeaux",
+        "Films & DVDs",
+        "High tech",
+        "Licences",
+        "Livres",
+        "Musique",
+        "Vêtements / Chaussures",
+        "Autres"
+      ]
+    },
+    {
+      "Loisirs & Sorties": [
+        "Sport",
+        "Bars / Clubs",
+        "Divertissements",
+        "Frais Animaux",
+        "Hobbies",
+        "Hôtels",
+        "Sortie au restaurant",
+        "Sorties culturelles",
+        "Voyages / Vacances",
+        "Autres"
+      ]
+    },
+    {
+      "Auto & Transports": [
+        "Assurance véhicule",
+        "Billet d'avion",
+        "Billet de train",
+        "Carburant",
+        "Entretien véhicule",
+        "Location véhicule",
+        "Péage",
+        "Stationnement",
+        "Transpors en commun",
+        "Autres"
+      ]
+    },
+    {
+      "Impôts & Taxes": [
+        "Amendes",
+        "Impôts foncier",
+        "Impôts sur le revenu",
+        "TVA",
+        "Taxes",
+        "Autres"
+      ]
+    },
+    {
+      "Santé": [
+        "Dentiste",
+        "Mutuelle",
+        "Médecin",
+        "Opticien / Ophtalmo.",
+        "Pharamacie",
+        "Autres"
+      ]
+    },
+    {
+      "Ésthétique & Soins": [
+        "Coiffeur",
+        "Cosmétique",
+        "Ésthétique",
+        "Spa & Massage",
+        "Autres"
+      ]
+    },
+    {
+      "Divers": [
+        "Assurance",
+        "A catégoriser",
+        "Dons",
+        "Tabac",
+        "Pressing",
+        "Autres"
+      ]
+    },
+    {
+      "Dépenses pro": [
+        "Service en ligne",
+        "Conseils",
+        "Comptabilité",
+        "Cotisations Sociales",
+        "Fournitures de Bureau",
+        "Frais d'expéditions",
+        "Frais d'impressions",
+        "Frais de recrutement",
+        "Frais juridique",
+        "Maintenance Bureaux",
+        "Marketing",
+        "Note de frais",
+        "Prévoyance",
+        "Publicité",
+        "Salaires",
+        "Sous-traitance",
+        "Autres"
+      ]
+    }
+
+  ]
+}
