@@ -15,9 +15,9 @@ class Fill_database():
     def create_db(self):
         with open('spent/json/init_db.json') as json_data:
             data = json.load(json_data)
-
+            data_length = len(data["categories"]) - 1
         i = 0
-        while i <= 13:
+        while i <= data_length:
             for category in data["categories"][i]:
                 new_category = Category.objects.create(name=category)
                 for outlays in data["categories"][i][category]:

@@ -12,7 +12,7 @@
         "Gaz",
         "Eau",
         "jardin",
-        "Autres"
+        "Autres - Logement"
       ]
     },
     {
@@ -24,16 +24,16 @@
         "Logmeent étudiant",
         "Pensions",
         "Prêt étudiant",
-        "Autres"
+        "Autres - Scolarité & Enfants"
       ]
     },
     {
-      "Alimentation & Restau": [
+      "Alimentation & Restau.": [
         "Supermarché / Épicerie",
         "Fast foods",
         "Restaurants",
         "Cafés / Terasses",
-        "Autres"
+        "Autres - Alimentation & Restau."
       ]
     },
     {
@@ -42,7 +42,7 @@
         "Téléphonie mobile",
         "Télephonie fixe",
         "Câble / Satellite",
-        "Autres"
+        "Autres - Abonnements"
       ]
     },
     {
@@ -51,7 +51,7 @@
         "Retraits",
         "Virements",
         "Virements internes",
-        "Autres"
+        "Autres - Retraits, Chq., Vrmt."
       ]
     },
     {
@@ -59,7 +59,7 @@
         "Frais bancaires",
         "Remboursement emprunt",
         "Hypothèque",
-        "Autres"
+        "Autres - Banques"
       ]
     },
     {
@@ -72,7 +72,7 @@
         "Livres",
         "Musique",
         "Vêtements / Chaussures",
-        "Autres"
+        "Autres -Achats & Shopping"
       ]
     },
     {
@@ -86,7 +86,7 @@
         "Sortie au restaurant",
         "Sorties culturelles",
         "Voyages / Vacances",
-        "Autres"
+        "Autres - Loisirs & Sorties"
       ]
     },
     {
@@ -100,7 +100,7 @@
         "Péage",
         "Stationnement",
         "Transpors en commun",
-        "Autres"
+        "Autres - Auto & Transports"
       ]
     },
     {
@@ -110,7 +110,7 @@
         "Impôts sur le revenu",
         "TVA",
         "Taxes",
-        "Autres"
+        "Autres - Impôts & Taxes"
       ]
     },
     {
@@ -120,7 +120,7 @@
         "Médecin",
         "Opticien / Ophtalmo.",
         "Pharamacie",
-        "Autres"
+        "Autres - Santé"
       ]
     },
     {
@@ -129,7 +129,7 @@
         "Cosmétique",
         "Ésthétique",
         "Spa & Massage",
-        "Autres"
+        "Autres - Ésthétique & Soins"
       ]
     },
     {
@@ -139,7 +139,7 @@
         "Dons",
         "Tabac",
         "Pressing",
-        "Autres"
+        "Autres - Divers"
       ]
     },
     {
@@ -160,7 +160,7 @@
         "Publicité",
         "Salaires",
         "Sous-traitance",
-        "Autres"
+        "Autres - Dépenses pro"
       ]
     }
 
