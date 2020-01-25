@@ -6,40 +6,120 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Renseignez vos dépense:</h2>
+            <h2 class="section-heading">Renseignez vos dépenses</h2>
             <hr class="divider my-4">
-            <p class="text-muted mb-0"><strong>.</strong></p>
           </div>
         </div>
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-lg-4 col-md-9 text-center">
-            <div class="service-box mt-5 mx-auto">
-              <h3>Liste des categories</h3>
+            {% if outlay %}
+          <div class="col-lg-6 col-md-9 text-center">
+              <div class="service-box mt-5 mx-auto">
+              <h3>Choisissez une categorie</h3>
+              <form id="cat_form"  action="{% url 'spent:record_outlay' %}" method="get" accept-charset="utf-8">
+                <select id="cat_id" name="cat_list">
 		        {% for all_categories in categories %}
-		                <p><a href="/">{{all_categories.name}}</a></p>
+                  <option value="{{all_categories.id}}">{{all_categories.name}}</option>
 		        {% endfor %}
+                  </select>
+                  <button class="btn btn-primary btn-xl mt-50" type="submit">Selectionner</button>
+                 <div class="form-group">
+            </div>
+                </form>
             </div>
           </div>
+            {% elif outlay_selected %}
+            <div class="col-lg-4 col-md-9 text-center">
+              <div class="service-box mt-5 mx-auto">
+              <h3>Choisissez une categorie</h3>
+              <form id="cat_form"  action="{% url 'spent:record_outlay' %}" method="get" accept-charset="utf-8">
+                <select id="cat_id" name="cat_list">
+		        {% for all_categories in categories %}
+                  <option value="{{all_categories.id}}">{{all_categories.name}}</option>
+		        {% endfor %}
+                  </select>
+                 <div class="form-group">
+                <button class="btn btn-primary btn-xl mt-50" type="submit">Selectionner</button>
+            </div>
+                </form>
+            </div>
+          </div>
+              {% else %}
+               <div class="col-lg-12 col-md-9 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <h3>Choisissez une categorie</h3>
+              <form id="cat_form"  action="{% url 'spent:record_outlay' %}" method="get" accept-charset="utf-8">
+                <select id="cat_id" name="cat_list">
+		        {% for all_categories in categories %}
+                  <option value="{{all_categories.id}}">{{all_categories.name}}</option>
+		        {% endfor %}
+                  </select>
+                 <div class="form-group">
+                <button class="btn btn-primary btn-xl mt-50" type="submit">Selectionner</button>
+            </div>
+                </form>
+            </div>
+          </div>
+            {% endif %}
+          {% if outlay %}
+          <div class="col-lg-6 col-md-9 text-center">
+            <div class="service-box mt-5 mx-auto">
+              <h3>Choisissez une dépense</h3>
+               <form id="outlay_form"  action="{% url 'spent:record_outlay' %}" method="get" accept-charset="utf-8">
+                <select id="outlay_list" name="outlay_list">
+		        {% for outlay_cat_selected in outlay %}
+                  <option value="{{outlay_cat_selected.id}}">{{outlay_cat_selected.name}}</option>
+		        {% endfor %}
+                  </select>
+                   <div class="form-group">
+                <button class="btn btn-primary btn-xl mt-50" type="submit">Selectionner</button>
+            </div>
+                </form>
+            </div>
+          </div>
+            {% elif outlay_selected %}
           <div class="col-lg-4 col-md-9 text-center">
             <div class="service-box mt-5 mx-auto">
-              <h3>Liste des dépenses</h3>
-		        {% for all_outlay in outlay %}
-		                <p><a href="/">{{all_outlay.name}}</a></p>
+              <h3>Choisissez une dépense</h3>
+               <form id="outlay_form"  action="{% url 'spent:record_outlay' %}" method="get" accept-charset="utf-8">
+                <select id="outlay_list" name="outlay_list">
+		        {% for outlay_cat_selected in outlay %}
+                  <option value="{{outlay_cat_selected.id}}">{{outlay_cat_selected.name}}</option>
 		        {% endfor %}
+                  </select>
+                   <div class="form-group">
+                <button class="btn btn-primary btn-xl mt-50" type="submit">Selectionner</button>
+            </div>
+                </form>
             </div>
           </div>
+                       {% endif %}
+          {% if outlay_selected %}
           <div class="col-lg-4 col-md-9 text-center">
             <div class="service-box mt-5 mx-auto">
-              <h3>À saisir</h3>
-		        {% for all_outlay in outlay %}
-		                <p>montant <a href="/">{{all_outlay.amount}}</a></p>
-                        <p>moyen de paiement <a href="/">{{all_outlay.payment_method}}</a></p>
-                        <p>date <a href="/">{{all_outlay.payment_date}}</a></p>
-		        {% endfor %}
+              <h3>Choisissez une dépense</h3>
+               <form method="post" action=".">
+                   <div class="fieldWrapper my-label">
+                       <p>Montant <a href="/">{{outlay_selected.amount}}</a></p>
+                       <p>Moyen de paiement <a href="/">{{outlay_selected.amount}}</a></p>
+                       <form method="post">{% csrf_token %}
+        <fieldset class="form-group">
+            </fieldset>
+        {% for field in RecordOutlayForm %}
+            <div class="fieldWrapper my-label">
+                <p>
+                {{field.label_tag}}
+                {{field}}
+            </p>
+        {% endfor %}
+                   <div class="form-group">
+                <button class="btn btn-primary btn-xl mt-50" type="submit">Enregistrer</button>
+            </div>
+                </form>
             </div>
           </div>
+            {% endif %}
     </section>
 
 {% endblock content %}
