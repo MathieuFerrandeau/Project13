@@ -1,41 +1,80 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.views.generic.dates import MonthArchiveView
 from .forms import RecordOutlayForm
-from .models import Category, Outlay
+from .models import Category, Outlay, UserOutlay
 # Create your views here.
-def expense_history_view(request):
+
+@login_required
+class ExpenseHistoryView(MonthArchiveView):
     """expense_history_view"""
-    return render(request, 'spent/expense_history.html')
+    queryset = UserOutlay.objects.all()
+    date_field = "payment_date"
+    allow_future = True
 
 @login_required
 def record_outlay_view(request):
-    """e"""
-    all_categories = Category.objects.all()
-    cat_user_selection = request.GET.get('cat_list')
-    outlay_cat_selected = Outlay.objects.filter(category=cat_user_selection)
-    print(outlay_cat_selected)
-    outlay_user_selection = request.GET.get('outlay_list')
-    if outlay_user_selection:
-        selected_outlay = Outlay.objects.get(id=outlay_user_selection)
-        print(selected_outlay)
-        print('on est la')
-        if request.method == 'POST':
-            form = RecordOutlayForm(request.POST)
-            if form.is_valid():
-                form.save()
-        return render(request, 'spent/record_outlay.html', {'categories': all_categories,
-                                                            'outlay': outlay_cat_selected,
-                                                            'outlay_selected': selected_outlay
-                                                            })
-    else:
 
-        return render(request, 'spent/record_outlay.html', {'categories': all_categories,
-                                                            'outlay': outlay_cat_selected,
-                                                            })
+    form = RecordOutlayForm(request.POST)
+    if form.is_valid():
+        outlay_selected = request.POST.get('outlay_field')
+        user = request.user
+        outlay = Outlay.objects.get(name=outlay_selected)
+        amount = form.cleaned_data['amount']
+        payment_method = form.cleaned_data['payment_method']
+        payment_date = form.cleaned_data['payment_date']
+        UserOutlay.objects.create(user_name=user, outlay=outlay, amount=amount, payment_method=payment_method,
+                                  payment_date=payment_date)
+        return redirect('spent:outlay_recorded')
+
+    else:
+        form = RecordOutlayForm()
+        category = Category.objects.all()
+        if request.method == 'POST':
+            cat_selected = request.POST.get('cat_list')
+            outlay = Outlay.objects.filter(category=cat_selected)
+            outlay_id = request.POST.get('outlay_list')
+            if outlay_id:
+                outlay_selected = Outlay.objects.get(id=outlay_id)
+                cat_outlay_selected_name = outlay_selected.category.name
+
+                return render(request, 'spent/record_outlay.html', {'categories': category,
+                                                                    'cat_outlay_selected_name': cat_outlay_selected_name,
+                                                                    'outlay': outlay,
+                                                                    'outlay_selected': outlay_selected,
+                                                                    'form': form,
+                                                                    })
+            else:
+                category_choose = Category.objects.get(id=cat_selected)
+                return render(request, 'spent/record_outlay.html', {'category_choose': category_choose,
+                                                                    'outlay': outlay,
+                                                                    })
+
+        return render(request, 'spent/record_outlay.html', {'categories': category})
+
+def outlay_recorded_view(request):
+    """outlay_recorded"""
+    return render(request, 'spent/outlay_recorded.html')
 
 def bills_view(request):
     """e"""
-    return render(request, 'spent/bills.html')
+    if request.method == 'POST':
+        form = RecordOutlayForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            outlay = Outlay.objects.get(id=213)
+            amount = form.cleaned_data['amount']
+            payment_method = form.cleaned_data['payment_method']
+            payment_date = form.cleaned_data['payment_date']
+            print(user, outlay, amount, payment_date, payment_method)
+            UserOutlay.objects.create(user_name=user, outlay=outlay, amount=amount, payment_method=payment_method,
+                                      payment_date=payment_date)
+            return redirect('spent:bills')
+    else:
+        form = RecordOutlayForm()
+
+    return render(request, 'spent/bills.html', {'form': form})
+
 
 
 

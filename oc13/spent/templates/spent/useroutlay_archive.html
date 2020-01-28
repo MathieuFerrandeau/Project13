@@ -4,7 +4,11 @@
 </header>
 <section class="text-center d-flex">
     <div class="container my-auto">
-        blablabla
+<ul>
+    {% for outlay in latest %}
+        <li>{{ outlay.payment_date }}: {{ outlay.outlay.name }}</li>
+    {% endfor %}
+</ul>
     </div>
 </section>
 

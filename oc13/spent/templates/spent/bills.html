@@ -4,7 +4,32 @@
 </header>
 <section class="text-center d-flex">
     <div class="container my-auto">
-        factures
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <h3 class="border-bottom mb-3">Créez votre compte Pur Beurre!</h3>
+            </fieldset>
+
+            <div class="fieldWrapper my-label">
+                <label for="{{ form.amount.id_for_label }}">test</label>
+                {{ form.amount }}
+                </div>
+
+            <div class="fieldWrapper my-label">
+                <label for="{{ form.payment_method.id_for_label }}">moyen de paiement</label>
+                {{ form.payment_method }}
+            </div>
+
+            <div class="fieldWrapper my-label">
+                <label for="{{ form.payment_date.id_for_label }}">date de paiement</label>
+                {{ form.payment_date }}
+            </div>
+
+
+            <div class="form-group">
+                <button class="btn btn-primary btn-xl mt-50" type="submit">S'inscrire</button>
+            </div>
+        </form>
     </div>
 </section>
 
