@@ -7,17 +7,17 @@
         <div class="row">
             {% if outlay %}
             <div class="col-lg-12 text-center">
-            <h2 class="section-heading">{{category_choose.name}}</h2>
+            <h2 class="section-heading">{{category_choose.name}} :</h2>
             <hr class="divider my-4">
           </div>
             {% elif outlay_selected %}
             <div class="col-lg-12 text-center">
-            <h2 class="section-heading">{{outlay_selected.name}}</h2>
+            <h2 class="section-heading">{{outlay_selected.name}} :</h2>
             <hr class="divider my-4">
           </div>
             {% else %}
           <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Renseignez vos dépenses</h2>
+            <h2 class="section-heading">Choisissez une categorie :</h2>
             <hr class="divider my-4">
           </div>
             {% endif %}
@@ -29,8 +29,6 @@
             {% elif outlay_selected %}
             {% else %}
                <div class="col-lg-12 col-md-9 text-center">
-            <div class="service-box mt-5 mx-auto">
-              <h3>Choisissez une categorie</h3>
               <form id="cat_form"  action="{% url 'spent:record_outlay' %}" method="post" accept-charset="utf-8">
                   {% csrf_token %}
                 <select id="cat_id" name="cat_list">
@@ -38,7 +36,7 @@
                   <option value="{{all_categories.id}}">{{all_categories.name}}</option>
 		        {% endfor %}
                   </select>
-                 <div class="form-group">
+                 <div class="form-group service-box mt-4 mx-auto">
                 <button class="btn btn-primary btn-xl mt-50" type="submit">Selectionner</button>
             </div>
                 </form>
@@ -47,8 +45,6 @@
             {% endif %}
           {% if outlay %}
           <div class="col-lg-12 col-md-9 text-center">
-            <div class="service-box mt-5 mx-auto">
-              <h3>Choisissez une dépense</h3>
                <form id="outlay_form"  action="{% url 'spent:record_outlay' %}" method="post" accept-charset="utf-8">
                    {% csrf_token %}
                 <select id="outlay_list" name="outlay_list">
@@ -56,33 +52,31 @@
                   <option value="{{outlay_cat_selected.id}}">{{outlay_cat_selected.name}}</option>
 		        {% endfor %}
                   </select>
-                   <div class="form-group">
+                   <div class="form-group service-box mt-4 mx-auto">
                 <button class="btn btn-primary btn-xl mt-50" type="submit">Selectionner</button>
             </div>
                 </form>
                 {% elif outlay_selected %}
           <div class="col-lg-12 col-md-9 text-center">
-            <div class="service-box mt-5 mx-auto">
               <form method="POST">
             {% csrf_token %}
             <div class="fieldWrapper my-label">
-                <label for="{{ form.amount.id_for_label }}">test</label>
+                <label for="{{ form.amount.id_for_label }}">Montant</label>
                 {{ form.amount }}
                 </div>
 
             <div class="fieldWrapper my-label">
-                <label for="{{ form.payment_method.id_for_label }}">moyen de paiement</label>
+                <label for="{{ form.payment_method.id_for_label }}">Moyen de paiement</label>
                 {{ form.payment_method }}
             </div>
 
             <div class="fieldWrapper my-label">
-                <label for="{{ form.payment_date.id_for_label }}">date de paiement</label>
+                <label for="{{ form.payment_date.id_for_label }}">Date de paiement</label>
                 {{ form.payment_date }}
             </div>
 
-
-            <div class="form-group">
-                <button class="btn btn-primary btn-xl mt-50" type="submit" id="outlay_field" name="outlay_field" value="{{outlay_selected.name}}" >S'inscrire</button>
+            <div class="form-group service-box mt-4 mx-auto">
+                <button class="btn btn-primary btn-xl mt-50" type="submit" id="outlay_field" name="outlay_field" value="{{outlay_selected.name}}" >Enregistrer</button>
             </div>
         </form>
             </div>
