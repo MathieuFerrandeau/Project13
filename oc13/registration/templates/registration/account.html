@@ -4,10 +4,10 @@
 </header>
 <section class="text-center d-flex">
     <div class="container my-auto">
-        <h1 class="text-uppercase"><strong>{{ user.username }}</strong></h1><br>
     <form method="post">{% csrf_token %}
         <fieldset class="form-group">
-                <h3 class="border-bottom mb-3">Vos informations:</h3>
+                <h2>Informations personnelles : </h2>
+            <hr class="divider my-4">
             </fieldset>
         {% for field in user_form %}
             <div class="fieldWrapper my-label">
@@ -31,14 +31,15 @@
             </div>
         {% endif %}
 
-        <div>
-            <a href="{% url 'password_change' %}"><strong>Modifiez votre mot de passe</strong></a>
-
-        </div><br>
 
         <div class="form-group">
                 <button class="btn btn-primary btn-xl mt-50" type="submit">Sauvegarder les changements</button>
             </div>
+
+                <div>
+            <a href="{% url 'registration:login' %}"><p><strong><i class="fas fa-lock" data-toggle="tooltip" title="S'identifier"></i> Modifier mon mot de passe</strong></p></a>
+
+        </div>
 
     </form>
         </div>

@@ -60,19 +60,20 @@
           <div class="col-lg-12 col-md-9 text-center">
               <form method="POST">
             {% csrf_token %}
-            <div class="fieldWrapper my-label">
-                <label for="{{ form.amount.id_for_label }}">Montant</label>
+            <p></p><div class="fieldWrapper my-label">
+                <label for="{{ form.amount.id_for_label }}">Montant :</label>
                 {{ form.amount }}
-                </div>
+                </div></p>
+
+            <p><div class="fieldWrapper my-label">
+                <label for="{{ form.payment_method.id_for_label }}">Date de paiement :</label>
+                 {{ form.payment_date }}
+            </div></p>
 
             <div class="fieldWrapper my-label">
-                <label for="{{ form.payment_method.id_for_label }}">Moyen de paiement</label>
-                {{ form.payment_method }}
-            </div>
+                <label for="{{ form.payment_date.id_for_label }}">Moyen de paiement :</label>
+               {{ form.payment_method }}
 
-            <div class="fieldWrapper my-label">
-                <label for="{{ form.payment_date.id_for_label }}">Date de paiement</label>
-                {{ form.payment_date }}
             </div>
 
             <div class="form-group service-box mt-4 mx-auto">
