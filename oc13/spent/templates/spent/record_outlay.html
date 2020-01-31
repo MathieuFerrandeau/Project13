@@ -55,23 +55,24 @@
                    <div class="form-group service-box mt-4 mx-auto">
                 <button class="btn btn-primary btn-xl mt-50" type="submit">Selectionner</button>
             </div>
+                   <a href="javascript:history.go(-1)"><strong><i class="fas fa-arrow-left"></i> Retour</strong></a>
                 </form>
                 {% elif outlay_selected %}
           <div class="col-lg-12 col-md-9 text-center">
               <form method="POST">
             {% csrf_token %}
             <p></p><div class="fieldWrapper my-label">
-                <label for="{{ form.amount.id_for_label }}">Montant :</label>
-                {{ form.amount }}
+                  <label for="{{ form.amount.id_for_label }}"><strong>Montant :</strong></label>
+                {{ form.amount }} <strong>€</strong>
                 </div></p>
 
             <p><div class="fieldWrapper my-label">
-                <label for="{{ form.payment_method.id_for_label }}">Date de paiement :</label>
+                  <label for="{{ form.payment_date.id_for_label }}"><strong>Date de paiement :</strong></label>
                  {{ form.payment_date }}
             </div></p>
 
             <div class="fieldWrapper my-label">
-                <label for="{{ form.payment_date.id_for_label }}">Moyen de paiement :</label>
+                <label for="{{ form.payment_methode.id_for_label }}"><strong>Moyen de paiement :</strong></label>
                {{ form.payment_method }}
 
             </div>
@@ -79,6 +80,7 @@
             <div class="form-group service-box mt-4 mx-auto">
                 <button class="btn btn-primary btn-xl mt-50" type="submit" id="outlay_field" name="outlay_field" value="{{outlay_selected.name}}" >Enregistrer</button>
             </div>
+                  <a href="javascript:history.go(-1)"><strong><i class="fas fa-arrow-left"></i> Retour</strong></a>
         </form>
             </div>
           </div>
