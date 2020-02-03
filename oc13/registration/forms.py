@@ -37,3 +37,8 @@ class AccountUpdateForm(forms.ModelForm):
         except User.DoesNotExist:
             return username
         raise forms.ValidationError('Username "%s" is already in use.' % username)
+
+class ContactForm(forms.Form):
+    from_email = forms.EmailField(required=True)
+    subject = forms.CharField(required=True)
+    message = forms.CharField(widget=forms.Textarea, required=True)

@@ -1,6 +1,4 @@
 """Fill the Database"""
-import datetime
-import requests
 import json
 from django.db.utils import DataError, IntegrityError
 from .models import Category, Outlay
