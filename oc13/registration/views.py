@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
-from .forms import RegisterForm, ConnexionForm, AccountUpdateForm
+from django.core.mail import send_mail, BadHeaderError
+from .forms import RegisterForm, ConnexionForm, AccountUpdateForm, ContactForm
 
 # Create your views here.
 
@@ -66,3 +68,22 @@ def account_view(request):
         )
     context['user_form'] = form
     return render(request, 'registration/account.html', context)
+
+def emailView(request):
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, from_email, ['admin@example.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('registration:success')
+    return render(request, "registration/contact_form.html", {'form': form})
+
+def successView(request):
+    return render(request, 'registration/success.html')

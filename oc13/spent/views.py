@@ -1,18 +1,10 @@
 import datetime
-from datetime import date
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.views.generic.dates import MonthArchiveView
 from .forms import RecordOutlayForm, UpdateOutlayForm
 from .models import Category, Outlay, UserOutlay
 # Create your views here.
 
-@login_required
-class UserOutlayArchiveMonthView(MonthArchiveView):
-    """expense_history_view"""
-    queryset = UserOutlay.objects.all()
-    date_field = "payment_date"
-    allow_future = True
 
 @login_required
 def record_outlay_view(request):
