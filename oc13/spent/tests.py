@@ -22,19 +22,20 @@ class SpentViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-class Fill_databaseTest(TestCase):
+class FillDatabaseTest(TestCase):
 
-    def setup(self):  # pragma: no cover
-        self.c = Fill_database()
-        self.c.create_db()
+    def setUp(self):
+        category = Category.objects.create(name="Logement")
+        outlay = Outlay.objects.create(name="Loyer", category=category)
+
 
     def test_create_categorie(self):
-        logement = Category.objects.filter(name='Logement')
-        self.assertIsNotNone(logement)
+        logement = Category.objects.get(name='Logement')
+        self.assertEqual(logement.name, 'Logement')
 
     def test_create_product(self):
-        product = Outlay.objects.filter(category=2)
-        self.assertIsNotNone(product)
+        product = Outlay.objects.get(category=2)
+        self.assertEqual(product.name, 'Loyer')
 
 class FormTestCase(TestCase):
 

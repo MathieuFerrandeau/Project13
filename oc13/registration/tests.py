@@ -1,4 +1,4 @@
-from django.test import TestCase, client
+from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
 from .forms import RegisterForm, ConnexionForm, AccountUpdateForm, ContactForm
@@ -8,6 +8,7 @@ from .forms import RegisterForm, ConnexionForm, AccountUpdateForm, ContactForm
 class RegistrationViewTests(TestCase):
 
     def setUp(self):
+        self.client = Client()
         user = User.objects.create(username='user', password="password")
 
     def test_login(self):
