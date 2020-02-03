@@ -1,6 +1,7 @@
 from django.test import TestCase, client
 from django.urls import reverse
 from django.contrib.auth.models import User
+from .forms import RegisterForm, ConnexionForm, AccountUpdateForm, ContactForm
 
 
 # Create your tests here.
@@ -42,3 +43,38 @@ class RegistrationViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertRedirects(response, reverse('password_reset_done'))
 
+    def test_success_view(self):
+        response = self.client.get(reverse('registration:success'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_email_view(self):
+        response = self.client.post(reverse('registration:success'),
+                                    {'subject': 'sujet',
+                                     'from_email': 'test@test.fr',
+                                     'message': 'testtest'}, follow=True)
+        self.assertEqual(response.status_code, 200)
+
+
+class FormTestCase(TestCase):
+
+    def test_connexion_form(self):
+        form_data = {'username': 'user',
+                     'password': 'password'}
+
+        form = ConnexionForm(data=form_data)
+        self.assertTrue(form.is_valid())
+
+    def test_account_update_form(self):
+        form_data = {'username': 'useruser',
+                     'email': 'test@test.fr'}
+
+        form = AccountUpdateForm(data=form_data)
+        self.assertTrue(form.is_valid())
+
+    def test_contact_form(self):
+        form_data = {'from_email': 'test@test.fr',
+                     'message': 'test_message',
+                     'subject': 'test_subject'}
+
+        form = ContactForm(data=form_data)
+        self.assertTrue(form.is_valid())

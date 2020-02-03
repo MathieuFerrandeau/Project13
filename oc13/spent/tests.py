@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
 from .models import UserOutlay, Outlay, Category
+from .forms import RecordOutlayForm, UpdateOutlayForm
 from .init_db import Fill_database
 
 # Create your tests here.
@@ -34,3 +35,21 @@ class Fill_databaseTest(TestCase):
     def test_create_product(self):
         product = Outlay.objects.filter(category=2)
         self.assertIsNotNone(product)
+
+class FormTestCase(TestCase):
+
+    def test_record_outlay_form(self):
+        form_data = {'amount': '2000',
+                     'payment_method': 'Virement',
+                     'payment_date': '2020-03-16'}
+
+        form = RecordOutlayForm(data=form_data)
+        self.assertTrue(form.is_valid())
+
+    def test_update_outlay_form(self):
+        form_data = form_data = {'amount': '3000',
+                     'payment_method': 'Espèce',
+                     'payment_date': '2020-07-23'}
+
+        form = UpdateOutlayForm(data=form_data)
+        self.assertTrue(form.is_valid())
