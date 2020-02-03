@@ -28,7 +28,6 @@ class FillDatabaseTest(TestCase):
         category = Category.objects.create(name="Logement")
         outlay = Outlay.objects.create(name="Loyer", category=category)
 
-
     def test_create_categorie(self):
         logement = Category.objects.get(name='Logement')
         self.assertEqual(logement.name, 'Logement')
@@ -48,7 +47,7 @@ class FormTestCase(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_update_outlay_form(self):
-        form_data = form_data = {'amount': '3000',
+        form_data = {'amount': '3000',
                      'payment_method': 'Espèce',
                      'payment_date': '2020-07-23'}
 
