@@ -2,7 +2,45 @@
 {% block content %}
 {% load static %}
 
-  <!-- Masthead -->
+
+      {% if user.is_authenticated %}
+
+<header class="smallheader text-center text-white d-flex"></header>
+
+<section class="page-section" id="about">
+    <div class="container">
+      <div class="col-lg-12 text-center">
+            <h1 class="section-heading">Bienvenue : {{user.username}}</h2>
+               <hr class="divider my-4">
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 text-center">
+          <div class="mt-5">
+            <a href="{% url 'spent:record_outlay' %}"> <i class="fas fa-plus fa-4x mb-4" data-toggle="tooltip"></i></a>
+            <a href="{% url 'spent:record_outlay' %}"><h3 class="h4 mb-2">Enregistrer une dépense</h3></a>
+            <p class="text-muted mb-0">Saisissez toutes vos différentes dépenses directement ici.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 text-center">
+          <div class="mt-5">
+            <a href="{% url 'spent:history' %}"> <i class="fas fa-history fa-4x mb-4"></i></a>
+            <a href="{% url 'spent:history' %}"><h3 class="h4 mb-2">Historique</h3></a>
+            <p class="text-muted mb-0">Retrouvez toutes vos dépenses enregistrées préalablement.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 text-center">
+          <div class="mt-5">
+            <a href="{% url 'registration:account' %}"> <i class="fas fa-user-edit fa-4x mb-4"></i></a>
+            <a href="{% url 'registration:account' %}"><h3 class="h4 mb-2">Mon compte</h3></a>
+            <p class="text-muted mb-0">Retrouvez et modifiez toutes les informations liées à votre compte.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% else %}
+
   <header class="masthead text-center d-flex">
     <div class="container h-100">
       <div class="row h-100 align-items-center justify-content-center text-center">
@@ -16,8 +54,6 @@
       </div>
     </div>
   </header>
-
-
   <!-- About Section -->
   <section id="about">
       <div class="container">
@@ -26,18 +62,11 @@
             <h2 class="section-heading">Gerer-Mon-Budget.fr</h2>
             <hr class="divider my-4">
             <p class="text-muted mb-0"><strong>Ce site web vous permet d'enregistrer, de stocker et de retrouver facilement vos différentes dépenses chaque mois.
-              <br>Pour pouvoir utiliser ce service il vous faudra créer un compte <a href ="{% url 'registration:register' %}"><i class="fas fa fa-user-plus" data-toggle="tooltip" title="S'enregistrer"></i></a> ou vous connectez si vous en possedez déja un <a href ="{% url 'registration:login' %}"><i class="fas fa-sign-in-alt" data-toggle="tooltip" title="Se Connecter"></i></a>.</strong></p>
+              <br>Pour pouvoir utiliser ce service il vous faudra créer un compte <a href ="{% url 'registration:register' %}"><i class="fas fa fa-user-plus" data-toggle="tooltip" title="S'enregistrer"></i></a> ou vous connectez si vous en possédez déjà un <a href ="{% url 'registration:login' %}"><i class="fas fa-sign-in-alt" data-toggle="tooltip" title="Se Connecter"></i></a>.</strong></p>
           </div>
         </div>
       </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 col-md-9 text-center">
-            <div class="divider my-4">
-              <p class="text-muted mb-0"><strong>Vous trouverez ci-dessous une vidéo qui vous montre comment fonctionne l'application.</strong></p>
-              <img src="/" title="Video" alt="Video" />
-              <p class="text-muted mb-0 mt-2"><strong>Demonstration</strong></p>
-            </div>
-          </div>
     </section>
+    {% endif %}
+
 {% endblock %}
