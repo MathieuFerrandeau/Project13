@@ -47,14 +47,15 @@
                         <p class="errorform">{{ error }}</p>
                     {% endfor %}
                 {% endif %}
-            </div>
 
-            <br>
+            </div>
+            <p>{{ help_message }}</p>
 
             <div class="form-group">
                 <button class="btn btn-primary btn-xl mt-50" type="submit">S'inscrire</button>
             </div>
         </form>
+
         <div>
                 <a href="{% url 'registration:login' %}"><p><strong><i class="fas fa-sign-in-alt" data-toggle="tooltip" title="S'identifier"></i> Déja un compte ?</strong></p></a>
         </div>

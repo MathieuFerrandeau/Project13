@@ -23,7 +23,9 @@ def register_view(request):
     else:
         form = RegisterForm()
 
-    return render(request, 'registration/register.html', {'form': form})
+    help_message = "Votre mot de passe doit contenir au moins 5 caractères dont des lettres."
+    return render(request, 'registration/register.html', {'form': form,
+                                                          'help_message': help_message})
 
 def logout_view(request):
     logout(request)
