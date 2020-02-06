@@ -28,7 +28,7 @@ class AccountUpdateForm(forms.ModelForm):
             user = User.objects.exclude(pk=self.instance.pk).get(email=email)
         except User.DoesNotExist:
             return email
-        raise forms.ValidationError('Email "%s" is already in use.' % email)
+        raise forms.ValidationError('Email "%s" is already in use.' % email) # pragma: no cover
 
     def clean_username(self):
         username = self.cleaned_data['username']
@@ -36,7 +36,8 @@ class AccountUpdateForm(forms.ModelForm):
             user = User.objects.exclude(pk=self.instance.pk).get(username=username)
         except User.DoesNotExist:
             return username
-        raise forms.ValidationError('Username "%s" is already in use.' % username)
+        raise forms.ValidationError('Username "%s" is already in use.' % username) # pragma: no cover
+
 
 class ContactForm(forms.Form):
     from_email = forms.EmailField(required=True)

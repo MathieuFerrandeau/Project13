@@ -7,9 +7,6 @@ from .models import Category, Outlay
 class Fill_database():
     """Initializes the database"""
 
-    def __init__(self):
-        pass
-
     def create_db(self):
         with open('spent/json/init_db.json') as json_data:
             data = json.load(json_data)

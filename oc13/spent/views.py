@@ -3,12 +3,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import RecordOutlayForm, UpdateOutlayForm
 from .models import Category, Outlay, UserOutlay
+
+
 # Create your views here.
 
 
 @login_required
 def record_outlay_view(request):
-
     form = RecordOutlayForm(request.POST)
     if form.is_valid():
         outlay_selected = request.POST.get('outlay_field')
@@ -48,29 +49,13 @@ def record_outlay_view(request):
 
         return render(request, 'spent/record_outlay.html', {'categories': category})
 
+
 def outlay_recorded_view(request):
     """outlay_recorded"""
     return render(request, 'spent/outlay_recorded.html')
 
-def bills_view(request):
-    """e"""
-    if request.method == 'POST':
-        form = RecordOutlayForm(request.POST)
-        if form.is_valid():
-            user = request.user
-            outlay = Outlay.objects.get(id=213)
-            amount = form.cleaned_data['amount']
-            payment_method = form.cleaned_data['payment_method']
-            payment_date = form.cleaned_data['payment_date']
-            print(user, outlay, amount, payment_date, payment_method)
-            UserOutlay.objects.create(user_name=user, outlay=outlay, amount=amount, payment_method=payment_method,
-                                      payment_date=payment_date)
-            return redirect('spent:bills')
-    else:
-        form = RecordOutlayForm()
 
-    return render(request, 'spent/bills.html', {'form': form})
-
+@login_required
 def history(request):
     """outlay_recorded"""
 
@@ -81,10 +66,10 @@ def history(request):
             '7': 'Juillet', '8': 'Août', '9': 'Septembre', '10': 'Octobre', '11': 'Novembre', '12': 'Décembre'}
 
     month_key_selected = request.GET.get('month_list')
-    #print(month_key_selected)
+    # print(month_key_selected)
     if month_key_selected:
         for month in useroutlay:
-            #print(month)
+            # print(month)
             user_outlaymonth = UserOutlay.objects.filter(user_name=request.user,
                                                          payment_date__month=month_key_selected,
                                                          payment_date__year=date.year)
@@ -101,19 +86,19 @@ def history(request):
                                                               'amount': amount})
 
             else:
-                error_message = ("Aucune dépense enregistrée pour le mois suivant : " + mois[month_key_selected] + ", renouvellez votre choix.")
+                error_message = ("Aucune dépense enregistrée pour le mois suivant : " + mois[
+                    month_key_selected] + ", renouvellez votre choix.")
                 return render(request, 'spent/history.html', {'outlay': useroutlay,
                                                               'mois': mois,
                                                               'date': date,
                                                               'error_message': error_message})
-
-
 
     return render(request, 'spent/history.html', {'outlay': useroutlay,
                                                   'date': date,
                                                   'mois': mois})
 
 
+@login_required
 def outlay_modification_view(request, outlay_id):
     outlay_selected = UserOutlay.objects.get(id=outlay_id)
     print(outlay_selected.amount)
@@ -125,7 +110,7 @@ def outlay_modification_view(request, outlay_id):
             payment_date = form.cleaned_data['payment_date']
             print(amount, payment_date, payment_method)
             UserOutlay.objects.filter(id=outlay_id).update(amount=amount, payment_method=payment_method,
-                                      payment_date=payment_date)
+                                                           payment_date=payment_date)
             outlay_selected = UserOutlay.objects.get(id=outlay_id)
             success_message = "Modifications prises en compte."
             return render(request, 'spent/outlay_modification.html', {'outlay_selected': outlay_selected,
@@ -143,6 +128,8 @@ def outlay_modification_view(request, outlay_id):
         return render(request, 'spent/outlay_modification.html', {'outlay_selected': outlay_selected,
                                                                   'form': form})
 
+
+@login_required
 def deleted_outlay_view(request, outlay_id):
     """outlay_recorded"""
     outlay_selected = UserOutlay.objects.get(id=outlay_id)
