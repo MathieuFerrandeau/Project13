@@ -11,4 +11,5 @@ urlpatterns = [
     path('outlay-deleted/<str:outlay_id>/', views.deleted_outlay_view, name='deleted_outlay'),
     path('outlay-modification/<str:outlay_id>/', views.outlay_modification_view, name='outlay_modification'),
     path('history/', views.history, name='history'),
+    path('empty-outlay/', views.empty_useroutlay_view, name="empty_useroutlay"),
 ]

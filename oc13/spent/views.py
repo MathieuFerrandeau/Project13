@@ -60,38 +60,42 @@ def history(request):
     """outlay_recorded"""
 
     useroutlay = UserOutlay.objects.filter(user_name=request.user)
-    date = datetime.datetime.now()
-    print(date.year)
-    mois = {'1': 'Janvier', '2': 'Février', '3': 'Mars', '4': 'Avril', '5': 'Mai', '6': 'Juin',
-            '7': 'Juillet', '8': 'Août', '9': 'Septembre', '10': 'Octobre', '11': 'Novembre', '12': 'Décembre'}
+    if useroutlay.exists() is False:
+        return redirect('spent:empty_useroutlay')
+    else:
+        print(useroutlay.exists())
+        date = datetime.datetime.now()
+        print(date.year)
+        mois = {'1': 'Janvier', '2': 'Février', '3': 'Mars', '4': 'Avril', '5': 'Mai', '6': 'Juin',
+                '7': 'Juillet', '8': 'Août', '9': 'Septembre', '10': 'Octobre', '11': 'Novembre', '12': 'Décembre'}
 
-    month_key_selected = request.GET.get('month_list')
-    # print(month_key_selected)
-    if month_key_selected:
-        for month in useroutlay:
-            # print(month)
-            user_outlaymonth = UserOutlay.objects.filter(user_name=request.user,
-                                                         payment_date__month=month_key_selected,
-                                                         payment_date__year=date.year)
-            print(user_outlaymonth)
-            if len(user_outlaymonth) != 0:
-                mois = mois[month_key_selected]
-                amount = 0
-                for sum in user_outlaymonth:
-                    amount += sum.amount
-                    print('izi', amount)
-                return render(request, 'spent/history.html', {'user_outlaymonth': user_outlaymonth,
-                                                              'mois': mois,
-                                                              'date': date,
-                                                              'amount': amount})
+        month_key_selected = request.GET.get('month_list')
+        # print(month_key_selected)
+        if month_key_selected:
+            for month in useroutlay:
+                # print(month)
+                user_outlaymonth = UserOutlay.objects.filter(user_name=request.user,
+                                                             payment_date__month=month_key_selected,
+                                                             payment_date__year=date.year)
+                print(user_outlaymonth)
+                if len(user_outlaymonth) != 0:
+                    mois = mois[month_key_selected]
+                    amount = 0
+                    for sum in user_outlaymonth:
+                        amount += sum.amount
+                        print('izi', amount)
+                    return render(request, 'spent/history.html', {'user_outlaymonth': user_outlaymonth,
+                                                                  'mois': mois,
+                                                                  'date': date,
+                                                                  'amount': amount})
 
-            else:
-                error_message = ("Aucune dépense enregistrée pour le mois suivant : " + mois[
-                    month_key_selected] + ", renouvellez votre choix.")
-                return render(request, 'spent/history.html', {'outlay': useroutlay,
-                                                              'mois': mois,
-                                                              'date': date,
-                                                              'error_message': error_message})
+                else:
+                    error_message = ("Aucune dépense enregistrée pour le mois suivant : " + mois[
+                        month_key_selected] + ", renouvellez votre choix.")
+                    return render(request, 'spent/history.html', {'outlay': useroutlay,
+                                                                  'mois': mois,
+                                                                  'date': date,
+                                                                  'error_message': error_message})
 
     return render(request, 'spent/history.html', {'outlay': useroutlay,
                                                   'date': date,
@@ -144,3 +148,8 @@ def deleted_outlay_view(request, outlay_id):
             return render(request, 'spent/deleted_outlay.html', {'delete': delete})
     print('bizi')
     return render(request, 'spent/deleted_outlay.html', {'outlay_selected': outlay_selected})
+
+
+@login_required
+def empty_useroutlay_view(request):
+    return render(request, 'spent/empty_useroutlay.html')

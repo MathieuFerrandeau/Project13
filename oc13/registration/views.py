@@ -5,6 +5,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.core.mail import send_mail, BadHeaderError
 from .forms import RegisterForm, ConnexionForm, AccountUpdateForm, ContactForm
 
+
 # Create your views here.
 
 
@@ -27,9 +28,11 @@ def register_view(request):
     return render(request, 'registration/register.html', {'form': form,
                                                           'help_message': help_message})
 
+
 def logout_view(request):
     logout(request)
     return redirect('core:index')
+
 
 def login_view(request):
     error = False
@@ -52,9 +55,9 @@ def login_view(request):
 
     return render(request, 'registration/login.html', locals())
 
+
 @login_required()
 def account_view(request):
-
     context = {}
 
     if request.method == "POST":
@@ -63,13 +66,14 @@ def account_view(request):
             form.save()
     else:
         form = AccountUpdateForm(
-            initial= {
+            initial={
                 "email": request.user.email,
                 "username": request.user.username,
             }
         )
     context['user_form'] = form
     return render(request, 'registration/account.html', context)
+
 
 def emailView(request):
     if request.method == 'GET':
@@ -87,5 +91,9 @@ def emailView(request):
             return redirect('registration:success')
     return render(request, "registration/contact_form.html", {'form': form})
 
+
 def successView(request):
     return render(request, 'registration/success.html')
+
+
+

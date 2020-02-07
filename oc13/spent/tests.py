@@ -22,7 +22,6 @@ class SpentViewTests(TestCase):
         self.useroutlay = UserOutlay.objects.create(user_name=self.user, outlay=self.outlay, amount=200, payment_method='Virement',
                                       payment_date='2020-02-22')
 
-
     def test_outlay_recorded_view(self):
         """outlay_recorded"""
         response = self.client.get(reverse('spent:outlay_recorded'))
@@ -43,9 +42,9 @@ class SpentViewTests(TestCase):
         response = self.client.get('/outlay-modification/3/')
         self.assertEqual(response.status_code, 302)
         self.client.login(username='user', password='password')
-        response = self.client.get('/outlay-modification/3/')
+        response = self.client.get('/outlay-modification/4/')
         self.assertEqual(response.status_code, 200)
-        response = self.client.post('/outlay-modification/3/',
+        response = self.client.post('/outlay-modification/4/',
                                     {'amount': '300',
                                      'payment_method': 'Virement',
                                      'payment_date': '2020-04-16'})
@@ -72,6 +71,13 @@ class SpentViewTests(TestCase):
                                                               'mois': '1',
                                                               'date': '2020',
                                                               'amount': "000"})
+        self.assertEqual(response.status_code, 200)
+
+    def test_empty_useroutlay_view(self):
+        response = self.client.get(reverse('spent:empty_useroutlay'))
+        self.assertEqual(response.status_code, 302)
+        self.client.login(username='user', password='password')
+        response = self.client.get(reverse('spent:empty_useroutlay'))
         self.assertEqual(response.status_code, 200)
 
 
