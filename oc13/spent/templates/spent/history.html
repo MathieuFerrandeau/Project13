@@ -9,14 +9,32 @@
             <div class="col-lg-12 text-center">
             <h2 class="section-heading">Vos dépenses pour {{mois}} {{date.year}} : </h2>
                <hr class="divider my-4">
+                <table class="col-lg-12 text-center">
+                <tr>
+                    <td><strong>Modifier</strong></td>
+                    <td><strong>Catégorie</strong></td>
+                    <td><strong>Dépense</strong></td>
+                    <td><strong>Date</strong></td>
+                    <td><strong>Montant</strong></td>
+
+                </tr>
                       {% for outlays in user_outlaymonth %}
-                <p><a href ="{% url 'spent:outlay_modification' outlay_id=outlays.id %}"><strong>{{outlays.outlay.category.name}} / {{outlays.outlay.name}} : {{outlays.payment_date}} {{outlays.amount}}€ </strong></a>
-
-
+                <tr>
+                    <td><a href ="{% url 'spent:outlay_modification' outlay_id=outlays.id %}"><i class="fas fa fa-edit" data-toggle="tooltip" title="Modifier"></i></td>
+                    <td>{{outlays.outlay.category.name}}</td>
+                    <td>{{outlays.outlay.name}}</td>
+                    <td>{{outlays.payment_date|date:"d/m/Y"}}</td>
+                    <td>{{outlays.amount}}€</td>
+                </tr>
                 {% endfor %}
-                <p><strong>Total : {{amount}} €</strong></p>
+                <tr>
+                    <td colspan="3" class="td-col"></td>
+                    <td><strong>Total</strong</td>
+                    <td><strong>{{amount}} €</strong></td>
+                </tr></table><br>
                  <div class="form-group service-box mt-4 mx-auto">
                 <a class="btn btn-primary btn-xl js-scroll-trigger" href="{% url 'spent:history' %}">Retour</a>
+            </div>
             </div>
                 {% else %}
           <div class="col-lg-12 text-center">

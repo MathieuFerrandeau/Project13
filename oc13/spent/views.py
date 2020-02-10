@@ -83,7 +83,6 @@ def history(request):
                     amount = 0
                     for sum in user_outlaymonth:
                         amount += sum.amount
-                        print('izi', amount)
                     return render(request, 'spent/history.html', {'user_outlaymonth': user_outlaymonth,
                                                                   'mois': mois,
                                                                   'date': date,
