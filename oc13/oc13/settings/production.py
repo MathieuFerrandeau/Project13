@@ -1,3 +1,4 @@
+"""Django production settings for oc13 project."""
 from . import *
 
 ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]

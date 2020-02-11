@@ -1,5 +1,6 @@
+"""Registration views"""
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from django.core.mail import send_mail, BadHeaderError
@@ -94,6 +95,3 @@ def emailView(request):
 
 def successView(request):
     return render(request, 'registration/success.html')
-
-
-

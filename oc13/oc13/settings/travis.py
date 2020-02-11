@@ -1,3 +1,4 @@
+"""Django travis settings for oc13 project."""
 from . import *
 
 DATABASES = {

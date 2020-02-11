@@ -1,7 +1,8 @@
+"""Registration tests"""
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
-from .forms import RegisterForm, ConnexionForm, AccountUpdateForm, ContactForm
+from .forms import ConnexionForm, AccountUpdateForm, ContactForm
 
 
 # Create your tests here.
@@ -24,7 +25,6 @@ class RegistrationViewTests(TestCase):
                                      'password': 'password'}, follow=True)
 
         self.assertEqual(response.status_code, 200)
-
 
     def test_register(self):
         response = self.client.get('/register/')
@@ -72,11 +72,9 @@ class RegistrationViewTests(TestCase):
                                      'message': 'testtest'}, follow=True)
         self.assertEqual(response.status_code, 200)
 
-
     def test_reset_password_view(self):
         response = self.client.get('/password-reset/')
         self.assertEqual(response.status_code, 200)
-
 
 
 class FormTestCase(TestCase):
@@ -102,5 +100,3 @@ class FormTestCase(TestCase):
 
         form = ContactForm(data=form_data)
         self.assertTrue(form.is_valid())
-
-

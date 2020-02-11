@@ -3,9 +3,9 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from .models import UserOutlay, Outlay, Category
 from .forms import RecordOutlayForm, UpdateOutlayForm
-from .init_db import Fill_database
 
 # Create your tests here.
+
 
 class SpentViewTests(TestCase):
 
@@ -19,8 +19,11 @@ class SpentViewTests(TestCase):
         self.user.save()
         self.category = Category.objects.create(name='test')
         self.outlay = Outlay.objects.create(name='test', category=self.category)
-        self.useroutlay = UserOutlay.objects.create(user_name=self.user, outlay=self.outlay, amount=200, payment_method='Virement',
-                                      payment_date='2020-02-22')
+        self.useroutlay = UserOutlay.objects.create(user_name=self.user,
+                                                    outlay=self.outlay,
+                                                    amount=200,
+                                                    payment_method='Virement',
+                                                    payment_date='2020-02-22')
 
     def test_outlay_recorded_view(self):
         """outlay_recorded"""

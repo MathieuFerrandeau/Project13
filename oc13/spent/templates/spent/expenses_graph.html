@@ -4,34 +4,42 @@
 </header>
 <section class="text-center d-flex">
      <div class="col-lg-12 text-center">
-         {% for outlays in outlay %}
+         {% for outlays in dataset %}
          {{outlays.outlay.name}}
          {% endfor %}
    <div id='container'>
     <script>
-    {% for outlays in outlay %}
-     Highcharts.chart('container', {
-
-    title: {
-        text: 'Chart.update'
-    },
-
-    subtitle: {
-        text: 'Plain'
-    },
-
-    xAxis: {
-        categories: ['{{outlays.outlay.category.name}}']
-    },
-
-    series: [{
-        type: 'column',
-        colorByPoint: true,
-        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
-        showInLegend: false
-    }]
-
-});{% endfor %}
+ Highcharts.chart('container', {
+            <div id="container"></div>
+<script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script>
+  Highcharts.chart('container', {
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'Titanic Survivors by Ticket Class'
+      },
+      xAxis: {
+          categories: [
+            {% for entry in dataset %}'{{ entry.ticket_class }} Class'{% if not forloop.last %}, {% endif %}{% endfor %}
+          ]
+      },
+      series: [{
+          name: 'Survived',
+          data: [
+            {% for entry in dataset %}{{ entry.survived_count }}{% if not forloop.last %}, {% endif %}{% endfor %}
+          ],
+          color: 'green'
+      }, {
+          name: 'Not survived',
+          data: [
+            {% for entry in dataset %}{{ entry.not_survived_count }}{% if not forloop.last %}, {% endif %}{% endfor %}
+          ],
+          color: 'red'
+      }]
+  });
+</script>
     </script>
    </div>
      </div>

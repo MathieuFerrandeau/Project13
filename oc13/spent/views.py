@@ -4,9 +4,6 @@ from django.contrib.auth.decorators import login_required
 from .forms import RecordOutlayForm, UpdateOutlayForm
 from .models import Category, Outlay, UserOutlay
 
-
-
-
 # Create your views here.
 
 
@@ -20,7 +17,10 @@ def record_outlay_view(request):
         amount = form.cleaned_data['amount']
         payment_method = form.cleaned_data['payment_method']
         payment_date = form.cleaned_data['payment_date']
-        UserOutlay.objects.create(user_name=user, outlay=outlay, amount=amount, payment_method=payment_method,
+        UserOutlay.objects.create(user_name=user,
+                                  outlay=outlay,
+                                  amount=amount,
+                                  payment_method=payment_method,
                                   payment_date=payment_date)
         return redirect('spent:outlay_recorded')
 
@@ -114,7 +114,8 @@ def outlay_modification_view(request, outlay_id):
             payment_method = form.cleaned_data['payment_method']
             payment_date = form.cleaned_data['payment_date']
             print(amount, payment_date, payment_method)
-            UserOutlay.objects.filter(id=outlay_id).update(amount=amount, payment_method=payment_method,
+            UserOutlay.objects.filter(id=outlay_id).update(amount=amount,
+                                                           payment_method=payment_method,
                                                            payment_date=payment_date)
             outlay_selected = UserOutlay.objects.get(id=outlay_id)
             success_message = "Modifications prises en compte."
@@ -157,22 +158,11 @@ def empty_useroutlay_view(request):
 
 
 def expenses_graph_view(request):
-    useroutlay = UserOutlay.objects.filter(user_name=request.user)
-    print(useroutlay)
-    if useroutlay.exists() is False:
-        return redirect('spent:empty_useroutlay')
-    else:
-        print(useroutlay.exists())
-        date = datetime.datetime.now()
-        print(date.month)
-        for month in useroutlay:
-            # print(month)
-            user_outlaymonth = UserOutlay.objects.filter(user_name=request.user,
-                                                         payment_date__month=date.month,
-                                                         payment_date__year=date.year)
-            for test in user_outlaymonth:
-                print(test.amount)
-                return render(request, 'spent/expenses_graph.html', {'outlay': user_outlaymonth,
-                                                                     'test': test,
-                                                                     'date': date})
+    dataset = [
+        {'ticket_class': 1, 'survived_count': 200, 'not_survived_count': 123},
+        {'ticket_class': 2, 'survived_count': 119, 'not_survived_count': 158},
+        {'ticket_class': 3, 'survived_count': 181, 'not_survived_count': 528}
+    ]
 
+    print(dataset)
+    return render(request, 'spent/expenses_graph.html', {'dataset': dataset})

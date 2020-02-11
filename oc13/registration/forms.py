@@ -1,7 +1,8 @@
+"""Register forms"""
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate
+
 
 class RegisterForm(UserCreationForm):
     """manages registration"""
@@ -11,10 +12,12 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
+
 class ConnexionForm(forms.Form):
     """manages the connection"""
     username = forms.CharField(label="Nom d'utilisateur", max_length=30)
     password = forms.CharField(label="Mot de passe", widget=forms.PasswordInput)
+
 
 class AccountUpdateForm(forms.ModelForm):
 
@@ -28,7 +31,7 @@ class AccountUpdateForm(forms.ModelForm):
             user = User.objects.exclude(pk=self.instance.pk).get(email=email)
         except User.DoesNotExist:
             return email
-        raise forms.ValidationError('Email "%s" is already in use.' % email) # pragma: no cover
+        raise forms.ValidationError('Email "%s" is already in use.' % email)  # pragma: no cover
 
     def clean_username(self):
         username = self.cleaned_data['username']
@@ -36,7 +39,7 @@ class AccountUpdateForm(forms.ModelForm):
             user = User.objects.exclude(pk=self.instance.pk).get(username=username)
         except User.DoesNotExist:
             return username
-        raise forms.ValidationError('Username "%s" is already in use.' % username) # pragma: no cover
+        raise forms.ValidationError('Username "%s" is already in use.' % username)  # pragma: no cover
 
 
 class ContactForm(forms.Form):

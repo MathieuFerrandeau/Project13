@@ -2,12 +2,14 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from .models import Category, Outlay, UserOutlay
 
+
 class CategoryTestCase(TestCase):
 
     def test_create_category(self):
         category = Category.objects.create(name="Logement")
         search = Category.objects.get(name="Logement")
         self.assertEqual(category, search)
+
 
 class OutlayTestCase(TestCase):
 
@@ -25,6 +27,7 @@ class OutlayTestCase(TestCase):
 
     def test_outlay_exist(self):
         self.assertEqual(self.outlay1.category, self.category)
+
 
 class UserOutlayTestCase(TestCase):
 

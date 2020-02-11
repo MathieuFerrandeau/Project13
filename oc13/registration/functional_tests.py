@@ -51,7 +51,9 @@ class UserTest(LiveServerTestCase):
 
         # Check if the after the form validation match the valid redirection
         # url
-        self.assertEqual(self.live_server_url + '/password-reset-done/', redirection_url)
+        self.assertEqual(self.live_server_url + '/password-reset-done/',
+                         redirection_url)
+
 
 class SignUpTest(LiveServerTestCase):
 
