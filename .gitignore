@@ -2,9 +2,9 @@
 env/
 p13-1.png
 p13-2.png
-__pycache__
+__pycache__/
 db.sqlite3
 .coverage
 oc13/htmlcov
 oc13/.coveragerc
-
+geckodriver.log

@@ -12,4 +12,5 @@ urlpatterns = [
     path('outlay-modification/<str:outlay_id>/', views.outlay_modification_view, name='outlay_modification'),
     path('history/', views.history, name='history'),
     path('empty-outlay/', views.empty_useroutlay_view, name="empty_useroutlay"),
+    path('expenses-graph/', views.expenses_graph_view, name="expenses_graph"),
 ]

@@ -5,6 +5,8 @@ from .forms import RecordOutlayForm, UpdateOutlayForm
 from .models import Category, Outlay, UserOutlay
 
 
+
+
 # Create your views here.
 
 
@@ -152,3 +154,25 @@ def deleted_outlay_view(request, outlay_id):
 @login_required
 def empty_useroutlay_view(request):
     return render(request, 'spent/empty_useroutlay.html')
+
+
+def expenses_graph_view(request):
+    useroutlay = UserOutlay.objects.filter(user_name=request.user)
+    print(useroutlay)
+    if useroutlay.exists() is False:
+        return redirect('spent:empty_useroutlay')
+    else:
+        print(useroutlay.exists())
+        date = datetime.datetime.now()
+        print(date.month)
+        for month in useroutlay:
+            # print(month)
+            user_outlaymonth = UserOutlay.objects.filter(user_name=request.user,
+                                                         payment_date__month=date.month,
+                                                         payment_date__year=date.year)
+            for test in user_outlaymonth:
+                print(test.amount)
+                return render(request, 'spent/expenses_graph.html', {'outlay': user_outlaymonth,
+                                                                     'test': test,
+                                                                     'date': date})
+
