@@ -15,11 +15,14 @@ Elle a pour objectifs de permettre aux utilisateurs de suivre efficacement leurs
 
 
 <ul>
-	<li>Développer une application proposant les fonctionnalités attendues par le client</li>
-	<li>Mettre en œuvre des tests d’intégration</li>
-	<li>Mettre en œuvre des tests unitaires</li>
- 	<li>Pérenniser son projet web en créant un plan de test</li>
-	<li>Produire un rapport de l’exécution des tests</li>
+	<li>Création d'un compte utilisateur</li>
+	<li>Connexion à un comtpe utilisateur</li>
+	<li>Modifications des informations d'un compte utilisateur</li>
+ 	<li>Réinitialisation du mot de passe d'un compte utilisateur</li>
+	<li>Enregistrement d'une dépense</li>
+	<li>Modification d'une dépense</li>
+	<li>Suppression d'une dépense</li>
+	<li>Consulter l'historique des dépenses mois par mois</li>
 </ul>
 
 Les fonctionnalités sont détaillées dans le ficher "Dossier de conception fonctionnel GERER-MON-BUDGET" dans le dossier "doc".
