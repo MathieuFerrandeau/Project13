@@ -78,7 +78,7 @@ def history(request):
                 # print(month)
                 user_outlaymonth = UserOutlay.objects.filter(user_name=request.user,
                                                              payment_date__month=month_key_selected,
-                                                             payment_date__year=date.year)
+                                                             payment_date__year=date.year).order_by('outlay')
                 print(user_outlaymonth)
                 if len(user_outlaymonth) != 0:
                     mois = mois[month_key_selected]

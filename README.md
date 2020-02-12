@@ -1,6 +1,6 @@
 # GERER-MON-BUDGET.FR
 
-Photo 
+![alt tag](https://user-images.githubusercontent.com/38226261/74353927-e20d4e00-4dba-11ea-9df0-ee112318e27a.png)
 
 Vous pouvez consulter l'application à l'adresse suivante: 
 
@@ -25,12 +25,12 @@ Elle a pour objectifs de permettre aux utilisateurs de suivre efficacement leurs
 	<li>Consulter l'historique des dépenses mois par mois</li>
 </ul>
 
-Les fonctionnalités sont détaillées dans le ficher "Dossier de conception fonctionnel GERER-MON-BUDGET" dans le dossier "doc".
+<i>Les fonctionnalités sont détaillées dans le ficher "Dossier de conception fonctionnel GERER-MON-BUDGET" dans le dossier "doc".</i>
 <h2>Dépendances</h2>
 
 Les dépendances nécessaires au bon fonctionnement de l'application sont disponible dans le fichier <strong>requirements.txt</strong>
 
-Les ressources techniques de l'application sont explicitées dans le fichier "Dossier de conception technique GERER-MON-BUDGET" dans le dossier "doc".
+<i>Les outils, les technologies et les méthodes mises en oeuvre pour réaliser l'application sont detaillés dans le fichier "Dossier de conception technique GERER-MON-BUDGET" dans le dossier "doc".</i>
 <h2>Installation</h2>
 
 La procédure de mise en production est détaillé dans le fichier "Dossier d'exploitation GERER-MON-BUDGET" dans le dossier "doc".
