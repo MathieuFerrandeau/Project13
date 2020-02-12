@@ -1,48 +1,39 @@
 {% extends "core/base.html" %}
 {% block content %}
-<header class="smallheader text-center text-white d-flex">
-</header>
+<header class="smallheader text-center text-white d-flex"></header>
 <section class="text-center d-flex">
     <div class="container my-auto">
-    <form method="post">{% csrf_token %}
-        <fieldset class="form-group">
+        <form method="post">{% csrf_token %}
+            <fieldset class="form-group">
                 <h2>Informations personnelles : </h2>
-            <hr class="divider my-4">
+                <hr class="divider my-4">
             </fieldset>
-        {% for field in user_form %}
+            {% for field in user_form %}
             <div class="fieldWrapper my-label">
                 <p>
                 {{field.label_tag}}
                 {{field}}
-            </p>
-        {% endfor %}
-
-
-        {% for field in account_form %}
+                </p>
+            {% endfor %}
+            {% for field in account_form %}
             {% for error in field.errors %}
                 <p>{{error}}</p>
             {% endfor %}
-        {% endfor %}
+            {% endfor %}
              </div>
-
-        {% if user_form.non_field_errors %}
+            {% if user_form.non_field_errors %}
             <div>
                 <p>{{user_form.non_field_errors}}</p>
             </div>
-        {% endif %}
-
-
-        <div class="form-group">
+            {% endif %}
+            <div class="form-group">
                 <button class="btn btn-primary btn-xl mt-50" type="submit">Sauvegarder les changements</button>
             </div>
-
-                <div>
+            <div>
             <a href="{% url 'registration:login' %}"><p><strong><i class="fas fa-lock" data-toggle="tooltip" title="S'identifier"></i> Modifier mon mot de passe</strong></p></a>
             <p class="text-muted mb-0"><a href ="{% url 'core:index' %}"><strong><i class="fas fa-home" data-toggle="tooltip" title="Acceuil"></i> Retournez à l'acceuil</strong></a></p>
-        </div>
-
-    </form>
-        </div>
-
+            </div>
+        </form>
+    </div>
 </section>
 {% endblock content %}
