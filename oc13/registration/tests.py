@@ -23,7 +23,6 @@ class RegistrationViewTests(TestCase):
         response = self.client.post(reverse('registration:login'),
                                     {'username': 'user',
                                      'password': 'password'}, follow=True)
-
         self.assertEqual(response.status_code, 200)
 
     def test_register(self):

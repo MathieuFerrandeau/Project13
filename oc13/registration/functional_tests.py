@@ -54,6 +54,35 @@ class UserTest(LiveServerTestCase):
         self.assertEqual(self.live_server_url + '/password-reset-done/',
                          redirection_url)
 
+    def test_account_modification(self):
+        # Open a selenium browser & retrieve the forms elements we want to test
+        self.browser.get(str(self.live_server_url) + '/login/')
+        username_input = self.browser.find_element_by_id('id_username')
+        password_input = self.browser.find_element_by_id('id_password')
+        submission_button = self.browser.find_element_by_class_name(
+            'btn-primary')
+
+        # Fill the forms input and click the submit button
+        username_input.send_keys('test')
+        password_input.send_keys('test1234')
+        submission_button.click()
+
+        self.browser.get(str(self.live_server_url) + '/account/')
+        print(self.live_server_url)
+        username_input = self.browser.find_element_by_id('id_username')
+        email_input = self.browser.find_element_by_id('id_email')
+        submission_button = self.browser.find_element_by_class_name(
+            'btn-primary')
+        username_input.send_keys('User2')
+        email_input.send_keys('test@mail.com')
+        submission_button.click()
+        redirection_url = self.browser.current_url
+
+        # Check if the after the form validation match the valid redirection
+        # url
+        self.assertEqual(self.live_server_url + '/account/',
+                         redirection_url)
+
 
 class SignUpTest(LiveServerTestCase):
 
