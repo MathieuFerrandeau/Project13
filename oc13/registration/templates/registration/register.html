@@ -11,8 +11,7 @@
             </fieldset>
 
             <div class="fieldWrapper my-label">
-                <p><label for="{{ form.username.id_for_label }}">Nom d'utilisateur :</label>
-                    {{ form.username }}</p>
+                <p><label for="{{ form.username.id_for_label }}">Nom d'utilisateur :</label>{{ form.username }}</p>
                 {% if form.username.errors %}
                     {% for error in form.username.errors %}
                         <p class="errorform">{{ error }}</p>
@@ -61,6 +60,4 @@
         </div>
     </div>
 </section>
-
-
 {% endblock content %}
