@@ -25,17 +25,19 @@ def register_view(request):
     else:
         form = RegisterForm()
 
-    help_message = "Votre mot de passe doit contenir au moins 5 caractères dont des lettres."
+    help_message = "Votre mot de passe doit être une association de lettres et de chiffres et contenir au moins cinq caractères."
     return render(request, 'registration/register.html', {'form': form,
                                                           'help_message': help_message})
 
 
 def logout_view(request):
+    """Allows an user to log out"""
     logout(request)
     return redirect('core:index')
 
 
 def login_view(request):
+    """Allows an user to login"""
     error = False
     user = request.user
     if user.is_authenticated:
@@ -59,8 +61,8 @@ def login_view(request):
 
 @login_required()
 def account_view(request):
+    """Allows users to modify their information"""
     context = {}
-
     if request.method == "POST":
         form = AccountUpdateForm(request.POST, instance=request.user)
         if form.is_valid():
@@ -72,11 +74,13 @@ def account_view(request):
                 "username": request.user.username,
             }
         )
+
     context['user_form'] = form
     return render(request, 'registration/account.html', context)
 
 
-def emailView(request):
+def email_view(request):
+    """Manages the contact form by sending the email"""
     if request.method == 'GET':
         form = ContactForm()
     else:
@@ -93,5 +97,6 @@ def emailView(request):
     return render(request, "registration/contact_form.html", {'form': form})
 
 
-def successView(request):
+def success_view(request):
+    """The confirmation view of the contact form"""
     return render(request, 'registration/success.html')
