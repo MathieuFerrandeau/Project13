@@ -22,7 +22,7 @@
         <form method="post">
         {% csrf_token %}
             <div>
-                <button class="btn btn-primary  mt-50" id="deleted_selected" name="bouton_selected" value="1" >Supprimer </button>
+                <button class="btn btn-primary  mt-50" id="deleted_selected" name="button_selected" value="1" >Supprimer </button>
                 <a href="{% url 'spent:outlay_modification' outlay_id=outlay_selected.id %}" class="btn btn-primary">Annuler</a>
             </div>
         </form>

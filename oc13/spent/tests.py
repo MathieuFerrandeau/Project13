@@ -28,6 +28,9 @@ class SpentViewTests(TestCase):
     def test_outlay_recorded_view(self):
         """outlay_recorded"""
         response = self.client.get(reverse('spent:outlay_recorded'))
+        self.assertEqual(response.status_code, 302)
+        self.client.login(username='user', password='password')
+        response = self.client.get(reverse('spent:outlay_recorded'))
         self.assertEqual(response.status_code, 200)
 
     def test_record_outlay_view(self):
@@ -59,7 +62,7 @@ class SpentViewTests(TestCase):
         self.client.login(username='user', password='password')
         response = self.client.get('/outlay-deleted/1/')
         self.assertEqual(response.status_code, 200)
-        response = self.client.post('/outlay-deleted/1/', {'bouton_selected': '1'})
+        response = self.client.post('/outlay-deleted/1/', {'button_selected': '1'})
         self.assertEqual(response.status_code, 200)
 
     def test_history_view(self):

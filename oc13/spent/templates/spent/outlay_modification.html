@@ -20,9 +20,9 @@
 
             <div class="fieldWrapper my-label">
                   <label for="{{ form.payment_method.id_for_label }}"><strong>Moyen de paiement : </strong></label>
-               {{ form.payment_method }}
+                {{ form.payment_method }}
             </div>
-
+            <br><strong>{{ success_message }}</strong>
             <div class="form-group service-box mt-4 mx-auto">
                 <button class="btn btn-primary btn-xl mt-50" type="submit" id="outlay_field" name="outlay_field" value="/" >Sauvegarder les changements</button>
             </div>

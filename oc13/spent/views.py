@@ -4,13 +4,15 @@ from django.contrib.auth.decorators import login_required
 from .forms import RecordOutlayForm, UpdateOutlayForm
 from .models import Category, Outlay, UserOutlay
 
+
 # Create your views here.
 
 
 @login_required
 def record_outlay_view(request):
+    """Manage the outlay record for an user"""
     form = RecordOutlayForm(request.POST)
-    if form.is_valid():
+    if form.is_valid():  
         outlay_selected = request.POST.get('outlay_field')
         user = request.user
         outlay = Outlay.objects.get(name=outlay_selected)
@@ -31,7 +33,7 @@ def record_outlay_view(request):
             cat_selected = request.POST.get('cat_list')
             outlay = Outlay.objects.filter(category=cat_selected)
             outlay_id = request.POST.get('outlay_list')
-            if outlay_id:
+            if outlay_id:  # if an outlay was chosen after the category
                 outlay_selected = Outlay.objects.get(id=outlay_id)
                 cat_outlay_selected_name = outlay_selected.category.name
 
@@ -41,26 +43,24 @@ def record_outlay_view(request):
                                                                     'outlay_selected': outlay_selected,
                                                                     'form': form,
                                                                     })
-            elif cat_selected:
+            elif cat_selected:  # if a category was chosen
                 category_choose = Category.objects.get(id=cat_selected)
                 return render(request, 'spent/record_outlay.html', {'category_choose': category_choose,
                                                                     'outlay': outlay,
                                                                     })
-            else:
-                return render(request, 'spent/record_outlay.html', {'categories': category})
 
         return render(request, 'spent/record_outlay.html', {'categories': category})
 
 
+@login_required
 def outlay_recorded_view(request):
-    """outlay_recorded"""
+    """Confirm an outlay record"""
     return render(request, 'spent/outlay_recorded.html')
 
 
 @login_required
 def history(request):
-    """outlay_recorded"""
-
+    """Allows users to have their spending history"""
     useroutlay = UserOutlay.objects.filter(user_name=request.user)
     if useroutlay.exists() is False:
         return redirect('spent:empty_useroutlay')
@@ -105,15 +105,14 @@ def history(request):
 
 @login_required
 def outlay_modification_view(request, outlay_id):
+    """Outlay modification by user view"""
     outlay_selected = UserOutlay.objects.get(id=outlay_id)
-    print(outlay_selected.amount)
     form = UpdateOutlayForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
             amount = form.cleaned_data['amount']
             payment_method = form.cleaned_data['payment_method']
             payment_date = form.cleaned_data['payment_date']
-            print(amount, payment_date, payment_method)
             UserOutlay.objects.filter(id=outlay_id).update(amount=amount,
                                                            payment_method=payment_method,
                                                            payment_date=payment_date)
@@ -123,7 +122,7 @@ def outlay_modification_view(request, outlay_id):
                                                                       'form': form,
                                                                       'success_message': success_message})
 
-    else:
+    else:  # if no user's modification
         form = UpdateOutlayForm(
             initial={
                 "amount": outlay_selected.amount,
@@ -137,23 +136,21 @@ def outlay_modification_view(request, outlay_id):
 
 @login_required
 def deleted_outlay_view(request, outlay_id):
-    """outlay_recorded"""
+    """Delete an user outlay view"""
     outlay_selected = UserOutlay.objects.get(id=outlay_id)
-    print(outlay_selected)
     if request.method == 'POST':
-        bouton_selected = request.POST.get('bouton_selected')
-        print(bouton_selected)
-        if bouton_selected == "1":
-            print('izi')
+        button_selected = request.POST.get('button_selected')
+        if button_selected == "1":  # if the user confirm the suppression
             UserOutlay.objects.filter(id=outlay_id).delete()
             delete = True
             return render(request, 'spent/deleted_outlay.html', {'delete': delete})
-    print('bizi')
-    return render(request, 'spent/deleted_outlay.html', {'outlay_selected': outlay_selected})
+    else:
+        return render(request, 'spent/deleted_outlay.html', {'outlay_selected': outlay_selected})
 
 
 @login_required
 def empty_useroutlay_view(request):
+    """if the user hasn't recorded any outlay"""
     return render(request, 'spent/empty_useroutlay.html')
 
 
