@@ -2,65 +2,63 @@
 {% block content %}
 <header class="smallheader text-center text-white d-flex">
 </header>
-  <section>
-      <div class="container">
+<section>
+    <div class="container">
         <div class="row">
             {% if user_outlaymonth %}
             <div class="col-lg-12 text-center">
             <h2 class="section-heading">Vos dépenses pour {{mois}} {{date.year}} : </h2>
-               <hr class="divider my-4">
+                <hr class="divider my-4">
                 <table class="col-lg-12 text-center">
-                <tr>
-                    <td><strong>Modifier</strong></td>
-                    <td><strong>Catégorie</strong></td>
-                    <td><strong>Dépense</strong></td>
-                    <td><strong>Date</strong></td>
-                    <td><strong>Montant</strong></td>
-
-                </tr>
-                      {% for outlays in user_outlaymonth %}
-                <tr>
-                    <td><a href ="{% url 'spent:outlay_modification' outlay_id=outlays.id %}"><i class="fas fa fa-edit" data-toggle="tooltip" title="Modifier"></i></td>
-                    <td>{{outlays.outlay.category.name}}</td>
-                    <td>{{outlays.outlay.name}}</td>
-                    <td>{{outlays.payment_date|date:"d/m/Y"}}</td>
-                    <td>{{outlays.amount}}€</td>
-                </tr>
-                {% endfor %}
-                <tr>
-                    <td colspan="3" class="td-col"></td>
-                    <td><strong>Total</strong</td>
-                    <td><strong>{{amount}} €</strong></td>
-                </tr></table><br>
-                 <div class="form-group service-box mt-4 mx-auto">
+                    <tr>
+                        <td><strong>Modifier</strong></td>
+                        <td><strong>Catégorie</strong></td>
+                        <td><strong>Dépense</strong></td>
+                        <td><strong>Date</strong></td>
+                        <td><strong>Montant</strong></td>
+                    </tr>
+                    {% for outlays in user_outlaymonth %}
+                    <tr>
+                        <td><a href ="{% url 'spent:outlay_modification' outlay_id=outlays.id %}"><i class="fas fa fa-edit" data-toggle="tooltip" title="Modifier"></i></td>
+                        <td>{{outlays.outlay.category.name}}</td>
+                        <td>{{outlays.outlay.name}}</td>
+                        <td>{{outlays.payment_date|date:"d/m/Y"}}</td>
+                        <td>{{outlays.amount}}€</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3" class="td-col"></td>
+                        <td><strong>Total</strong</td>
+                        <td><strong>{{amount}} €</strong></td>
+                    </tr>
+                </table><br>
+                <div class="form-group service-box mt-4 mx-auto">
                 <a class="btn btn-primary btn-xl js-scroll-trigger" href="{% url 'spent:history' %}">Retour</a>
+                </div>
             </div>
-            </div>
-                {% else %}
-          <div class="col-lg-12 text-center">
+            {% else %}
+            <div class="col-lg-12 text-center">
             <h2 class="section-heading"> <i class="fas fa-history" data-toggle="tooltip" title="Mon historique de dépenses"></i> Historique de vos dépenses pour {{date.year}} :</h2>
-               <hr class="divider my-4">
-              <br>
-              <form id="month_form"  action="{% url 'spent:history' %}" method="get" accept-charset="utf-8">
-               <p>Choisissez un mois : <select id="month_list" name="month_list">
-		        {% for key, values in mois.items %}
-                    <option value="{{key}}">{{values}}</option>
-		        {% endfor %}
-                  </select></p>
-                  <strong>{{error_message}}</strong>
-                 <div class="form-group service-box mt-4 mx-auto">
-                <button class="btn btn-primary btn-xl mt-50" type="submit">Selectionner</button>
-            </div>
+                <hr class="divider my-4">
+                <br>
+                <form id="month_form"  action="{% url 'spent:history' %}" method="get" accept-charset="utf-8">
+                    <p>Choisissez un mois : <select id="month_list" name="month_list">
+		            {% for key, values in mois.items %}
+                        <option value="{{key}}">{{values}}</option>
+		            {% endfor %}
+                    </select></p>
+                    <strong>{{error_message}}</strong>
+                    <div class="form-group service-box mt-4 mx-auto">
+                    <button class="btn btn-primary btn-xl mt-50" type="submit">Selectionner</button>
+                    </div>
                 </form>
-              <div class="divider my-4">
-                  <p class="text-muted mb-0"><a href ="{% url 'spent:record_outlay' %}"><strong><i class="fas fa-plus" data-toggle="tooltip" title="Dépenses à saisir"></i> Enregistrez une nouvelle dépense</strong></a></p>
-              <p class="text-muted mb-0"><a href ="{% url 'core:index' %}"><strong><i class="fas fa-home" data-toggle="tooltip" title="Acceuil"></i> Retournez à l'acceuil</strong></a></p>
-
+                <div class="divider my-4">
+                    <p class="text-muted mb-0"><a href ="{% url 'spent:record_outlay' %}"><strong><i class="fas fa-plus" data-toggle="tooltip" title="Dépenses à saisir"></i> Enregistrez une nouvelle dépense</strong></a></p>
+                    <p class="text-muted mb-0"><a href ="{% url 'core:index' %}"><strong><i class="fas fa-home" data-toggle="tooltip" title="Acceuil"></i> Retournez à l'acceuil</strong></a></p>
+                </div>
                 {% endif %}
             </div>
-          </div>
-          </div>
-            </div>
-    </section>
-
+        </div>
+    </div>
+</section>
 {% endblock content %}

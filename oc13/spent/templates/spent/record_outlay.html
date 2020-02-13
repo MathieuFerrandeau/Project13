@@ -4,88 +4,88 @@
 </header>
 <section id="about">
       <div class="container">
-        <div class="row">
+            <div class="row">
             {% if outlay %}
-            <div class="col-lg-12 text-center">
-            <h2 class="section-heading">{{category_choose.name}} :</h2>
-            <hr class="divider my-4">
-          </div>
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">{{category_choose.name}} :</h2>
+                    <hr class="divider my-4">
+                </div>
             {% elif outlay_selected %}
-            <div class="col-lg-12 text-center">
-            <h2 class="section-heading">{{outlay_selected.name}} :</h2>
-            <hr class="divider my-4">
-          </div>
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">{{outlay_selected.name}} :</h2>
+                    <hr class="divider my-4">
+                </div>
             {% else %}
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Choisissez une categorie :</h2>
-            <hr class="divider my-4">
-          </div>
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Choisissez une categorie :</h2>
+                    <hr class="divider my-4">
+                </div>
             {% endif %}
-        </div>
+            </div>
       </div>
       <div class="container">
-        <div class="row">
+            <div class="row">
             {% if outlay %}
             {% elif outlay_selected %}
             {% else %}
-               <div class="col-lg-12 col-md-9 text-center">
-              <form id="cat_form"  action="{% url 'spent:record_outlay' %}" method="post" accept-charset="utf-8">
-                  {% csrf_token %}
-                <select id="cat_id" name="cat_list">
-		        {% for all_categories in categories %}
-                  <option value="{{all_categories.id}}">{{all_categories.name}}</option>
-		        {% endfor %}
-                  </select>
-                 <div class="form-group service-box mt-4 mx-auto">
-                <button class="btn btn-primary btn-xl mt-50" type="submit">Selectionner</button>
-            </div>
-                </form>
-                   <p class="text-muted mb-0"><a href ="{% url 'core:index' %}"><strong><i class="fas fa-home" data-toggle="tooltip" title="Acceuil"></i> Retournez à l'acceuil</strong></a></p>
-            </div>
-          </div>
+                <div class="col-lg-12 col-md-9 text-center">
+                    <form id="cat_form"  action="{% url 'spent:record_outlay' %}" method="post" accept-charset="utf-8">
+                    {% csrf_token %}
+                        <select id="cat_id" name="cat_list">
+		            {% for all_categories in categories %}
+                        <option value="{{all_categories.id}}">{{all_categories.name}}</option>
+		            {% endfor %}
+                        </select>
+                    <div class="form-group service-box mt-4 mx-auto">
+                        <button class="btn btn-primary btn-xl mt-50" type="submit">Selectionner</button>
+                    </div>
+                    </form>
+                    <p class="text-muted mb-0"><a href ="{% url 'core:index' %}"><strong><i class="fas fa-home" data-toggle="tooltip" title="Acceuil"></i> Retournez à l'acceuil</strong></a></p>
+                </div>
             {% endif %}
-          {% if outlay %}
-          <div class="col-lg-12 col-md-9 text-center">
-               <form id="outlay_form"  action="{% url 'spent:record_outlay' %}" method="post" accept-charset="utf-8">
-                   {% csrf_token %}
-                <select id="outlay_list" name="outlay_list">
-		        {% for outlay_cat_selected in outlay %}
-                  <option value="{{outlay_cat_selected.id}}">{{outlay_cat_selected.name}}</option>
-		        {% endfor %}
-                  </select>
-                   <div class="form-group service-box mt-4 mx-auto">
-                <button class="btn btn-primary btn-xl mt-50" type="submit">Selectionner</button>
-            </div>
-                   <a href="javascript:history.go(-1)"><strong><i class="fas fa-arrow-left"></i> Retour</strong></a>
-                </form>
-                {% elif outlay_selected %}
-          <div class="col-lg-12 col-md-9 text-center">
-              <form method="POST">
-            {% csrf_token %}
-            <p></p><div class="fieldWrapper my-label">
-                  <label for="{{ form.amount.id_for_label }}"><strong>Montant :</strong></label>
-                {{ form.amount }} <strong>€</strong>
-                </div></p>
+            {% if outlay %}
+                <div class="col-lg-12 col-md-9 text-center">
+                    <form id="outlay_form"  action="{% url 'spent:record_outlay' %}" method="post" accept-charset="utf-8">
+                    {% csrf_token %}
+                        <select id="outlay_list" name="outlay_list">
+		            {% for outlay_cat_selected in outlay %}
+                            <option value="{{outlay_cat_selected.id}}">{{outlay_cat_selected.name}}</option>
+		            {% endfor %}
+                        </select>
+                        <div class="form-group service-box mt-4 mx-auto">
+                            <button class="btn btn-primary btn-xl mt-50" type="submit">Selectionner</button>
+                        </div>
+                        <a href="javascript:history.go(-1)"><strong><i class="fas fa-arrow-left"></i> Retour</strong></a>
+                    </form>
+                </div>
+            {% elif outlay_selected %}
+                <div class="col-lg-12 col-md-9 text-center">
+                    <form method="POST">
+                    {% csrf_token %}
+                        <p><div class="fieldWrapper my-label">
+                            <label for="{{ form.amount.id_for_label }}"><strong>Montant :</strong></label>
+                            {{ form.amount }} <strong>€</strong>
+                        </div></p>
 
-            <p><div class="fieldWrapper my-label">
-                  <label for="{{ form.payment_date.id_for_label }}"><strong>Date de paiement :</strong></label>
-                 {{ form.payment_date }}
-            </div></p>
+                        <p><div class="fieldWrapper my-label">
+                            <label for="{{ form.payment_date.id_for_label }}"><strong>Date de paiement :</strong></label>
+                            {{ form.payment_date }}
+                        </div></p>
 
-            <div class="fieldWrapper my-label">
-                <label for="{{ form.payment_methode.id_for_label }}"><strong>Moyen de paiement :</strong></label>
-               {{ form.payment_method }}
+                        <div class="fieldWrapper my-label">
+                            <label for="{{ form.payment_methode.id_for_label }}"><strong>Moyen de paiement :</strong></label>
+                            {{ form.payment_method }}
+                        </div>
 
-            </div>
-
-            <div class="form-group service-box mt-4 mx-auto">
-                <button class="btn btn-primary btn-xl mt-50" type="submit" id="outlay_field" name="outlay_field" value="{{outlay_selected.name}}" >Enregistrer</button>
-            </div>
-                  <a href="javascript:history.go(-1)"><strong><i class="fas fa-arrow-left"></i> Retour</strong></a>
-        </form>
-            </div>
+                        <div class="form-group service-box mt-4 mx-auto">
+                            <button class="btn btn-primary btn-xl mt-50" type="submit" id="outlay_field" name="outlay_field" value="{{outlay_selected.name}}" >Enregistrer</button>
+                        </div>
+                        <a href="javascript:history.go(-1)"><strong><i class="fas fa-arrow-left"></i> Retour</strong></a>
+                    </form>
+                </div>
           </div>
-            {% endif %}
-    </section>
+          {% endif %}
+      </div>
+</section>
 
 {% endblock content %}

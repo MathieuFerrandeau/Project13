@@ -4,30 +4,29 @@
 </header>
 <section class="text-center d-flex">
     {% if delete %}
-     <div class="col-lg-12 text-center">
-            <h2 class="section-heading"><i class="fas fa-trash-alt" data-toggle="tooltip"></i> Suppression effectuée</h2>
-               <hr class="divider my-4">
-         <p class="text-muted mb-0"><a href ="{% url 'spent:record_outlay' %}"><strong><i class="fas fa-plus" data-toggle="tooltip" title="Dépenses à saisir"></i> Enregistrer une nouvelle dépense</strong></a></p>
-              <div class="divider my-4">
-              <p class="text-muted mb-0"><a href ="{% url 'spent:history' %}"><strong><i class="fas fa-history" data-toggle="tooltip" title="Mon historique de dépenses"></i> Historique de mes dépenses</strong></a></p>
+    <div class="col-lg-12 text-center">
+        <h2 class="section-heading"><i class="fas fa-trash-alt" data-toggle="tooltip"></i> Suppression effectuée</h2>
+        <hr class="divider my-4">
+            <p class="text-muted mb-0"><a href ="{% url 'spent:record_outlay' %}"><strong><i class="fas fa-plus" data-toggle="tooltip" title="Dépenses à saisir"></i> Enregistrer une nouvelle dépense</strong></a></p>
+            <div class="divider my-4">
+                <p class="text-muted mb-0"><a href ="{% url 'spent:history' %}"><strong><i class="fas fa-history" data-toggle="tooltip" title="Mon historique de dépenses"></i> Historique de mes dépenses</strong></a></p>
             </div>
-              <div class="divider my-4">
-              <p class="text-muted mb-0"><a href ="{% url 'core:index' %}"><strong><i class="fas fa-home" data-toggle="tooltip" title="Accueil"></i> Retour à l'acceuil</strong></a></p>
+            <div class="divider my-4">
+                <p class="text-muted mb-0"><a href ="{% url 'core:index' %}"><strong><i class="fas fa-home" data-toggle="tooltip" title="Accueil"></i> Retour à l'acceuil</strong></a></p>
             </div>
-         {% else %}
- <div class="col-lg-12 text-center">
+    {% else %}
+        <div class="col-lg-12 text-center">
             <h2 class="section-heading">{{outlay_selected.outlay.name}} : {{outlay_selected.amount}} €, {{outlay_selected.payment_method}}, {{outlay_selected.payment_date}}</h2>
-               <hr class="divider my-4">
-     <p><strong>Souhaitez vous vraiment supprimer cette dépense ?</strong></p>
-     <form method="post">
-         {% csrf_token %}
-     <div>
+            <hr class="divider my-4">
+            <p><strong>Souhaitez vous vraiment supprimer cette dépense ?</strong></p>
+        <form method="post">
+        {% csrf_token %}
+            <div>
                 <button class="btn btn-primary  mt-50" id="deleted_selected" name="bouton_selected" value="1" >Supprimer </button>
                 <a href="{% url 'spent:outlay_modification' outlay_id=outlay_selected.id %}" class="btn btn-primary">Annuler</a>
             </div>
-         </form>
-         {% endif %}
-
+        </form>
+    {% endif %}
     </div>
 </section>
 {% endblock content %}

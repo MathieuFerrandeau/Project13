@@ -4,12 +4,11 @@
 </header>
 <section class="text-center d-flex">
     <div class="col-lg-12 text-center">
-            <h2 class="section-heading"> <i class="fas fa-file-invoice" data-toggle="tooltip" title="Dépense"></i> {{outlay_selected.outlay.name}} : {{outlay_selected.amount}} €<br>{{outlay_selected.payment_date}}<br> {{outlay_selected.payment_method}}</h2>
-               <hr class="divider my-4">
-              <form method="POST">
+        <h2 class="section-heading"> <i class="fas fa-file-invoice" data-toggle="tooltip" title="Dépense"></i> {{outlay_selected.outlay.name}} : {{outlay_selected.amount}} €<br>{{outlay_selected.payment_date}}<br> {{outlay_selected.payment_method}}</h2>
+        <hr class="divider my-4">
+        <form method="POST">
             {% csrf_token %}
-
-            <p></p><div class="fieldWrapper my-label">
+            <p><div class="fieldWrapper my-label">
                   <label for="{{ form.amount.id_for_label }}"><strong>Montant :  </strong></label>
                   {{ form.amount }} <strong>€</strong>
                 </div></p>
@@ -17,21 +16,20 @@
             <p><div class="fieldWrapper my-label">
                   <label for="{{ form.payment_date.id_for_label }}"><strong>Date de paiement : </strong></label>
                  {{ form.payment_date }}
-            </div></p>
+                </div></p>
 
             <div class="fieldWrapper my-label">
-                <label for="{{ form.payment_method.id_for_label }}"><strong>Moyen de paiement : </strong></label>
+                  <label for="{{ form.payment_method.id_for_label }}"><strong>Moyen de paiement : </strong></label>
                {{ form.payment_method }}
-
             </div>
+
             <div class="form-group service-box mt-4 mx-auto">
                 <button class="btn btn-primary btn-xl mt-50" type="submit" id="outlay_field" name="outlay_field" value="/" >Sauvegarder les changements</button>
             </div>
-                  <a href="{% url 'spent:deleted_outlay' outlay_id=outlay_selected.id  %}"><strong><i class="fas fa-times"></i> Supprimer</strong></a></p>
 
+            <a href="{% url 'spent:deleted_outlay' outlay_id=outlay_selected.id  %}"><strong><i class="fas fa-times"></i> Supprimer</strong></a>
         </form>
-        <a href="{% url 'spent:history' %}"><strong><i class="fas fa-times"></i> Retour</strong></a></p>
+        <a href="{% url 'spent:history' %}"><strong><i class="fas fa-times"></i> Retour</strong></a>
     </div>
-
 </section>
 {% endblock content %}

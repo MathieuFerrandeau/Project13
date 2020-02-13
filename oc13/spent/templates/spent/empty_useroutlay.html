@@ -2,32 +2,30 @@
 {% block content %}
 <header class="smallheader text-center text-white d-flex">
 </header>
-  <section>
-      <div class="container">
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading"><i class="fas fa-times-circle"></i> Vous n'avez enregistré aucune dépense pour le moment.</h2>
+        <hr class="divider my-4">
         <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading"><i class="fas fa-times-circle"></i> Vous n'avez enregistré aucune dépense pour le moment.</h2>
-            <hr class="divider my-4">
-              <div class="row">
-        <div class="col-lg-6 col-md-6 text-center">
-          <div class="mt-5">
-            <a href="{% url 'spent:record_outlay' %}"> <i class="fas fa-plus fa-4x mb-4" data-toggle="tooltip"></i></a>
-            <a href="{% url 'spent:record_outlay' %}"><h3 class="h4 mb-2">Enregistrer une dépense</h3></a>
-            <p class="text-muted mb-0">Saisissez toutes vos différentes dépenses directement ici.</p>
-          </div>
-        </div>
-         <div class="col-lg-6 col-md-6 text-center">
-          <div class="mt-5">
-            <a href="{% url 'registration:account' %}"> <i class="fas fa-user-edit fa-4x mb-4"></i></a>
-            <a href="{% url 'registration:account' %}"><h3 class="h4 mb-2">Mon compte</h3></a>
-            <p class="text-muted mb-0">Retrouvez et modifiez toutes les informations liées à votre compte.</p>
-          </div>
-        </div>
-          </div>
-
-          </div>
+          <div class="col-lg-6 col-md-6 text-center">
+            <div class="mt-5">
+              <a href="{% url 'spent:record_outlay' %}"> <i class="fas fa-plus fa-4x mb-4" data-toggle="tooltip"></i></a>
+              <a href="{% url 'spent:record_outlay' %}"><h3 class="h4 mb-2">Enregistrer une dépense</h3></a>
+              <p class="text-muted mb-0">Saisissez toutes vos différentes dépenses directement ici.</p>
             </div>
+          </div>
+          <div class="col-lg-6 col-md-6 text-center">
+            <div class="mt-5">
+              <a href="{% url 'registration:account' %}"> <i class="fas fa-user-edit fa-4x mb-4"></i></a>
+              <a href="{% url 'registration:account' %}"><h3 class="h4 mb-2">Mon compte</h3></a>
+              <p class="text-muted mb-0">Retrouvez et modifiez toutes les informations liées à votre compte.</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
-
+    </div>
+  </div>
+</section>
 {% endblock content %}
