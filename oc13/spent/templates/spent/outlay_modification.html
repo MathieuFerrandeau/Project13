@@ -29,7 +29,7 @@
 
             <a href="{% url 'spent:deleted_outlay' outlay_id=outlay_selected.id  %}"><strong><i class="fas fa-times"></i> Supprimer</strong></a>
         </form>
-        <a href="{% url 'spent:history' %}"><strong><i class="fas fa-times"></i> Retour</strong></a>
+        <a href="{% url 'spent:history_outlay'  month_selected=outlay_selected.payment_date|date:'m' category_name=outlay_selected.outlay.category.name %}"><strong><i class="fas fa-times"></i> Retour</strong></a>
     </div>
 </section>
 {% endblock content %}

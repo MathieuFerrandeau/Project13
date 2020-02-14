@@ -39,7 +39,6 @@ class SpentViewTests(TestCase):
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('spent:record_outlay'))
         self.assertEqual(response.status_code, 200)
-        print(self.outlay)
         response = self.client.post('/record-outlay/', {'categories': self.category,
                                                         'outlay': self.outlay})
         self.assertEqual(response.status_code, 200)
@@ -48,9 +47,9 @@ class SpentViewTests(TestCase):
         response = self.client.get('/outlay-modification/3/')
         self.assertEqual(response.status_code, 302)
         self.client.login(username='user', password='password')
-        response = self.client.get('/outlay-modification/4/')
+        response = self.client.get('/outlay-modification/6/')
         self.assertEqual(response.status_code, 200)
-        response = self.client.post('/outlay-modification/4/',
+        response = self.client.post('/outlay-modification/6/',
                                     {'amount': '300',
                                      'payment_method': 'Virement',
                                      'payment_date': '2020-04-16'})
@@ -72,11 +71,27 @@ class SpentViewTests(TestCase):
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('spent:history'))
         self.assertEqual(response.status_code, 200)
-        response = self.client.get(reverse('spent:history'), {'month_list': '1',
+        response = self.client.get(reverse('spent:history'), {'month_list': '01',
                                                               'user_outlaymonth': '1',
                                                               'mois': '1',
                                                               'date': '2020',
                                                               'amount': "000"})
+        self.assertEqual(response.status_code, 200)
+
+    def test_history_categories_view(self):
+        """History"""
+        response = self.client.get('/history/categories/01/')
+        self.assertEqual(response.status_code, 302)
+        self.client.login(username='user', password='password')
+        response = self.client.get('/history/categories/02/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_history_outlay_view(self):
+        """History"""
+        response = self.client.get('/history/outlay/02/test/')
+        self.assertEqual(response.status_code, 302)
+        self.client.login(username='user', password='password')
+        response = self.client.get('/history/outlay/02/test/')
         self.assertEqual(response.status_code, 200)
 
     def test_empty_useroutlay_view(self):

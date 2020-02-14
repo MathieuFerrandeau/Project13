@@ -25,7 +25,9 @@ def register_view(request):
     else:
         form = RegisterForm()
 
-    help_message = "Votre mot de passe doit être une association de lettres et de chiffres et contenir au moins cinq caractères."
+    help_message = "Votre mot de passe doit être une " \
+                   "association de lettres et de chiffres et contenir au moins cinq " \
+                   "caractères. "
     return render(request, 'registration/register.html', {'form': form,
                                                           'help_message': help_message})
 
