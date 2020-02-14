@@ -24,4 +24,6 @@ urlpatterns = [
          name="empty_useroutlay"),
     path('expenses-graph/', views.expenses_graph_view,
          name="expenses_graph"),
+    path('expenses/graph/<str:month_selected>/', views.expenses_graph_month_view,
+         name="expenses_graph_month"),
 ]

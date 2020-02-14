@@ -106,7 +106,8 @@ def history_categories_view(request, month_selected):
                                          .distinct("outlay__category")
     data = {}
     for categories in user_outlaymonth:
-        categories_amount = UserOutlay.objects.filter(outlay__category__name=categories.outlay.category.name)\
+        categories_amount = UserOutlay.objects.filter(user_name=request.user,
+                                                      outlay__category__name=categories.outlay.category.name)\
             .aggregate(category_amount=Sum('amount'))
         data[categories.outlay.category.name] = categories_amount['category_amount']
 
@@ -186,11 +187,50 @@ def empty_useroutlay_view(request):
 
 
 def expenses_graph_view(request):
-    dataset = [
-        {'ticket_class': 1, 'survived_count': 200, 'not_survived_count': 123},
-        {'ticket_class': 2, 'survived_count': 119, 'not_survived_count': 158},
-        {'ticket_class': 3, 'survived_count': 181, 'not_survived_count': 528}
-    ]
+    useroutlay = UserOutlay.objects.filter(user_name=request.user)
+    if useroutlay.exists() is False:
+        return redirect('spent:empty_useroutlay')
+    else:
+        date = datetime.datetime.now()
+        mois = {'01': 'Janvier', '02': 'Février', '03': 'Mars', '04': 'Avril', '05': 'Mai', '06': 'Juin',
+                '07': 'Juillet', '08': 'Août', '09': 'Septembre', '10': 'Octobre', '11': 'Novembre', '12': 'Décembre'}
 
-    print(dataset)
-    return render(request, 'spent/expenses_graph.html', {'dataset': dataset})
+        month_selected = request.GET.get('month_list')
+        if month_selected:
+            user_outlaymonth = UserOutlay.objects.filter(user_name=request.user,
+                                                         payment_date__month=month_selected)
+            if len(user_outlaymonth) != 0:
+                return redirect('spent:expenses_graph_month', month_selected)
+
+            else:
+                error_message = ("Aucune dépense enregistrée pour le mois suivant : " + mois[
+                    month_selected] + ", renouvellez votre choix.")
+
+                return render(request, 'spent/expenses_graph.html', {'outlay': useroutlay,
+                                                              'mois': mois,
+                                                              'date': date,
+                                                              'error_message': error_message})
+
+    return render(request, 'spent/expenses_graph.html', {'outlay': useroutlay,
+                                                  'date': date,
+                                                  'mois': mois})
+
+
+@login_required
+def expenses_graph_month_view(request, month_selected):
+    mois = {'01': 'Janvier', '02': 'Février', '03': 'Mars', '04': 'Avril', '05': 'Mai', '06': 'Juin',
+            '07': 'Juillet', '08': 'Août', '09': 'Septembre', '10': 'Octobre', '11': 'Novembre', '12': 'Décembre'}
+
+    mois = mois[month_selected]
+    outlay = UserOutlay.objects.filter(user_name=request.user,
+                                       payment_date__month=month_selected).distinct("outlay__category")
+
+    data = {}
+    for categories in outlay:
+        categories_amount = UserOutlay.objects.filter(user_name=request.user,
+                                                      outlay__category__name=categories.outlay.category.name) \
+            .aggregate(category_amount=Sum('amount'))
+        data[categories.outlay.category.name] = categories_amount['category_amount']
+    print(data)
+    return render(request, 'spent/expenses_graph_month.html', {'outlay': outlay,
+                                                               'data': data})
