@@ -229,6 +229,7 @@ def expenses_graph_month_view(request, month_selected):
     data = {}
     for categories in outlay:
         categories_amount = UserOutlay.objects.filter(user_name=request.user,
+                                                      payment_date__month=month_selected,
                                                       outlay__category__name=categories.outlay.category.name) \
             .aggregate(category_amount=Sum('amount'))
         data[categories.outlay.category.name] = categories_amount['category_amount']

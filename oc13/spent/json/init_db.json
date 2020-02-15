@@ -7,11 +7,11 @@
         "Electricité",
         "Assurance habitation",
         "Charges diverses",
-        "décoration",
+        "Décoration",
         "Entretiens",
         "Gaz",
         "Eau",
-        "jardin",
+        "Jardin",
         "Autres - Logement"
       ]
     },
@@ -21,18 +21,18 @@
         "Pensions",
         "Baby-sitters & Crèches",
         "Fournitures scolaire",
-        "Logmeent étudiant",
+        "Logement étudiant",
         "Pensions",
         "Prêt étudiant",
         "Autres - Scolarité & Enfants"
       ]
     },
     {
-      "Alimentation & Restau.": [
+      "Alimentation & Restaurant": [
         "Supermarché / Épicerie",
         "Fast foods",
         "Restaurants",
-        "Cafés / Terasses",
+        "Cafés / Terrasses",
         "Autres - Alimentation & Restau."
       ]
     },
@@ -72,7 +72,7 @@
         "Livres",
         "Musique",
         "Vêtements / Chaussures",
-        "Autres -Achats & Shopping"
+        "Autres - Achats & Shopping"
       ]
     },
     {
@@ -124,7 +124,7 @@
       ]
     },
     {
-      "Ésthétique & Soins": [
+      "Esthétique & Soins": [
         "Coiffeur",
         "Cosmétique",
         "Ésthétique",
@@ -143,14 +143,14 @@
       ]
     },
     {
-      "Dépenses pro": [
+      "Dépenses professionnelles": [
         "Service en ligne",
         "Conseils",
         "Comptabilité",
         "Cotisations Sociales",
         "Fournitures de Bureau",
-        "Frais d'expéditions",
-        "Frais d'impressions",
+        "Frais d'expédition",
+        "Frais d'impression",
         "Frais de recrutement",
         "Frais juridique",
         "Maintenance Bureaux",
