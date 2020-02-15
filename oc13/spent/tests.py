@@ -47,9 +47,9 @@ class SpentViewTests(TestCase):
         response = self.client.get('/outlay-modification/3/')
         self.assertEqual(response.status_code, 302)
         self.client.login(username='user', password='password')
-        response = self.client.get('/outlay-modification/6/')
+        response = self.client.get('/outlay-modification/7/')
         self.assertEqual(response.status_code, 200)
-        response = self.client.post('/outlay-modification/6/',
+        response = self.client.post('/outlay-modification/7/',
                                     {'amount': '300',
                                      'payment_method': 'Virement',
                                      'payment_date': '2020-04-16'})
@@ -77,6 +77,20 @@ class SpentViewTests(TestCase):
                                                               'date': '2020',
                                                               'amount': "000"})
         self.assertEqual(response.status_code, 200)
+
+    def test_history_redirect_view(self):
+        """History"""
+        self.client = Client()
+        self.username = 'test'
+        self.email = 'test@test2.com'
+        self.password = 'test'
+        self.user = User(username=self.username, email=self.email)
+        self.user.set_password(self.password)
+        self.user.save()
+        self.client.login(username='test', password='test')
+        response = self.client.get(reverse('spent:history'))
+        self.assertRedirects(response, expected_url=reverse('spent:empty_useroutlay'), status_code=302,
+                             target_status_code=200)
 
     def test_history_categories_view(self):
         """History"""

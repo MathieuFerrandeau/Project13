@@ -1,8 +1,7 @@
 import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count, Q, Sum
-from decimal import Decimal
+from django.db.models import Sum
 from .forms import RecordOutlayForm, UpdateOutlayForm
 from .models import Category, Outlay, UserOutlay
 
