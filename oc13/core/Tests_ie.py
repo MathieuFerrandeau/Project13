@@ -1,5 +1,11 @@
-"""Test Internet explorer Driver via Browserstack"""
-from selenium import webdriver
+"""Test Internet explorer Driver via Browserstack
+   This test must be launched with the command: python3 Tests_ie.py
+"""
+
+# Remove """ line 8 and line 29 to make the test operational
+# change command_executor line 22 by the identifiers provided by Browserstack
+
+"""from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
@@ -20,4 +26,4 @@ driver.get("https://projet13.mathieuferrandeau.fr/")
 if not "GERER-MON-BUDGET.FR" in driver.title:
     raise Exception("Unable to load https://projet13.mathieuferrandeau.fr/")
 print(driver.title)
-driver.quit()
+driver.quit()"""

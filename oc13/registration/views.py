@@ -26,7 +26,8 @@ def register_view(request):
         form = RegisterForm()
 
     help_message = "Votre mot de passe doit être une " \
-                   "association de lettres et de chiffres et contenir au moins cinq " \
+                   "association de lettres et de chiffres et " \
+                   "contenir au moins cinq " \
                    "caractères. "
     return render(request, 'registration/register.html', {'form': form,
                                                           'help_message': help_message})
@@ -49,7 +50,7 @@ def login_view(request):
         if form.is_valid():
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
-            user = authenticate(username=username, password=password)  # check if data is correct
+            user = authenticate(username=username, password=password)
             if user:  # if the returned object is not None
                 login(request, user)  # connect the user
                 return render(request, 'core/index.html')
@@ -92,7 +93,8 @@ def email_view(request):
             from_email = form.cleaned_data['from_email']
             message = form.cleaned_data['message']
             try:
-                send_mail(subject, message, from_email, ['assistance.oc13@gmail.com'])
+                send_mail(subject, message, from_email,
+                          ['assistance.oc13@gmail.com'])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('registration:success')

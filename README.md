@@ -25,12 +25,12 @@ Elle a pour objectifs de permettre aux utilisateurs de suivre efficacement leurs
 	<li>Consulter l'historique des dépenses mois par mois</li>
 </ul>
 
-<i>Les fonctionnalités sont détaillées dans le ficher "Dossier de conception fonctionnel GERER-MON-BUDGET" dans le dossier "doc".</i>
+<i>Les fonctionnalités sont détaillées dans le ficher "Dossier de conception fonctionnel GERER-MON-BUDGET" dans le dossier "Doc".</i>
 <h2>Dépendances</h2>
 
 Les dépendances nécessaires au bon fonctionnement de l'application sont disponible dans le fichier <strong>requirements.txt</strong>
 
-<i>Les outils, les technologies et les méthodes mises en oeuvre pour réaliser l'application sont detaillés dans le fichier "Dossier de conception technique GERER-MON-BUDGET" dans le dossier "doc".</i>
+<i>Les outils, les technologies et les méthodes mises en oeuvre pour réaliser l'application sont detaillés dans le fichier "Dossier de conception technique GERER-MON-BUDGET" dans le dossier "Doc".</i>
 <h2>Installation</h2>
 
-La procédure de mise en production est détaillé dans le fichier "Dossier d'exploitation GERER-MON-BUDGET" dans le dossier "doc".
+La procédure de mise en production est détaillé dans le fichier "Dossier d'exploitation GERER-MON-BUDGET" dans le dossier "Doc".

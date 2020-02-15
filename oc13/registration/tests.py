@@ -26,9 +26,13 @@ class RegistrationViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_login_redirect(self):
-        self.assertTrue(self.client.login(username='user', password='password'))
+        self.assertTrue(self.client.login(username='user',
+                                          password='password'))
         response = self.client.get(reverse('registration:login'))
-        self.assertRedirects(response, expected_url=reverse('core:index'), status_code=302, target_status_code=200)
+        self.assertRedirects(response,
+                             expected_url=reverse('core:index'),
+                             status_code=302,
+                             target_status_code=200)
 
     def test_register(self):
         response = self.client.get('/register/')
@@ -44,13 +48,17 @@ class RegistrationViewTests(TestCase):
     def test_logout(self):
         self.client.login(username='user', password='password')
         self.client.logout()
-        self.assertRaises(KeyError, lambda: self.client.session['_auth_user_id'])
+        self.assertRaises(KeyError,
+                          lambda: self.client.session['_auth_user_id'])
 
     def test_logout_redirect(self):
         self.client.login(username='user', password='password')
         self.client.logout()
         response = self.client.get(reverse('registration:logout'))
-        self.assertRedirects(response, expected_url=reverse('core:index'), status_code=302, target_status_code=200)
+        self.assertRedirects(response,
+                             expected_url=reverse('core:index'),
+                             status_code=302,
+                             target_status_code=200)
 
     def test_account(self):
         response = self.client.get('/account/')

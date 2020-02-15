@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .models import UserOutlay, Outlay, Category
 from .forms import RecordOutlayForm, UpdateOutlayForm
 
+
 # Create your tests here.
 
 
@@ -18,7 +19,8 @@ class SpentViewTests(TestCase):
         self.user.set_password(self.password)
         self.user.save()
         self.category = Category.objects.create(name='test')
-        self.outlay = Outlay.objects.create(name='test', category=self.category)
+        self.outlay = Outlay.objects.create(name='test',
+                                            category=self.category)
         self.useroutlay = UserOutlay.objects.create(user_name=self.user,
                                                     outlay=self.outlay,
                                                     amount=200,
@@ -39,8 +41,9 @@ class SpentViewTests(TestCase):
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('spent:record_outlay'))
         self.assertEqual(response.status_code, 200)
-        response = self.client.post('/record-outlay/', {'categories': self.category,
-                                                        'outlay': self.outlay})
+        response = self.client.post('/record-outlay/',
+                                    {'categories': self.category,
+                                     'outlay': self.outlay})
         self.assertEqual(response.status_code, 200)
 
     def test_outlay_modification_view(self):
@@ -61,7 +64,8 @@ class SpentViewTests(TestCase):
         self.client.login(username='user', password='password')
         response = self.client.get('/outlay-deleted/1/')
         self.assertEqual(response.status_code, 200)
-        response = self.client.post('/outlay-deleted/1/', {'button_selected': '1'})
+        response = self.client.post('/outlay-deleted/1/',
+                                    {'button_selected': '1'})
         self.assertEqual(response.status_code, 200)
 
     def test_history_view(self):
@@ -71,11 +75,12 @@ class SpentViewTests(TestCase):
         self.client.login(username='user', password='password')
         response = self.client.get(reverse('spent:history'))
         self.assertEqual(response.status_code, 200)
-        response = self.client.get(reverse('spent:history'), {'month_list': '01',
-                                                              'user_outlaymonth': '1',
-                                                              'mois': '1',
-                                                              'date': '2020',
-                                                              'amount': "000"})
+        response = self.client.get(reverse('spent:history'),
+                                   {'month_list': '01',
+                                    'user_outlaymonth': '1',
+                                    'mois': '1',
+                                    'date': '2020',
+                                    'amount': "000"})
         self.assertEqual(response.status_code, 200)
 
     def test_history_redirect_view(self):
@@ -89,7 +94,9 @@ class SpentViewTests(TestCase):
         self.user.save()
         self.client.login(username='test', password='test')
         response = self.client.get(reverse('spent:history'))
-        self.assertRedirects(response, expected_url=reverse('spent:empty_useroutlay'), status_code=302,
+        self.assertRedirects(response,
+                             expected_url=reverse('spent:empty_useroutlay'),
+                             status_code=302,
                              target_status_code=200)
 
     def test_history_categories_view(self):
@@ -120,7 +127,8 @@ class FillDatabaseTest(TestCase):
 
     def setUp(self):
         category = Category.objects.create(name="Logement")
-        outlay = Outlay.objects.create(name="Loyer", category=category)
+        outlay = Outlay.objects.create(name="Loyer",
+                                       category=category)
 
     def test_create_categorie(self):
         logement = Category.objects.get(name='Logement')

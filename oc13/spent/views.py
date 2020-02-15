@@ -26,7 +26,6 @@ def record_outlay_view(request):
                                   payment_method=payment_method,
                                   payment_date=payment_date)
         return redirect('spent:outlay_recorded')
-
     else:
         form = RecordOutlayForm()
         category = Category.objects.all()
@@ -37,20 +36,21 @@ def record_outlay_view(request):
             if outlay_id:  # if an outlay was chosen after the category
                 outlay_selected = Outlay.objects.get(id=outlay_id)
                 cat_outlay_selected_name = outlay_selected.category.name
-
-                return render(request, 'spent/record_outlay.html', {'categories': category,
-                                                                    'cat_outlay_selected_name': cat_outlay_selected_name,
-                                                                    'outlay': outlay,
-                                                                    'outlay_selected': outlay_selected,
-                                                                    'form': form,
-                                                                    })
+                return render(request, 'spent/record_outlay.html',
+                              {'categories': category,
+                               'cat_outlay_selected_name': cat_outlay_selected_name,
+                               'outlay': outlay,
+                               'outlay_selected': outlay_selected,
+                               'form': form,
+                               })
             elif cat_selected:  # if a category was chosen
                 category_choose = Category.objects.get(id=cat_selected)
-                return render(request, 'spent/record_outlay.html', {'category_choose': category_choose,
-                                                                    'outlay': outlay,
-                                                                    })
-
-        return render(request, 'spent/record_outlay.html', {'categories': category})
+                return render(request, 'spent/record_outlay.html',
+                              {'category_choose': category_choose,
+                               'outlay': outlay,
+                               })
+        return render(request, 'spent/record_outlay.html',
+                      {'categories': category})
 
 
 @login_required
@@ -67,8 +67,10 @@ def history(request):
         return redirect('spent:empty_useroutlay')
     else:
         date = datetime.datetime.now()
-        mois = {'01': 'Janvier', '02': 'Février', '03': 'Mars', '04': 'Avril', '05': 'Mai', '06': 'Juin',
-                '07': 'Juillet', '08': 'Août', '09': 'Septembre', '10': 'Octobre', '11': 'Novembre', '12': 'Décembre'}
+        mois = {'01': 'Janvier', '02': 'Février', '03': 'Mars',
+                '04': 'Avril', '05': 'Mai', '06': 'Juin',
+                '07': 'Juillet', '08': 'Août', '09': 'Septembre',
+                '10': 'Octobre', '11': 'Novembre', '12': 'Décembre'}
 
         month_selected = request.GET.get('month_list')
         if month_selected:
@@ -78,7 +80,8 @@ def history(request):
                 return redirect('spent:history_categories', month_selected)
 
             else:
-                error_message = ("Aucune dépense enregistrée pour le mois suivant : " + mois[month_selected] + ", renouvellez votre choix.")
+                error_message = ("Aucune dépense enregistrée pour le mois suivant : " + mois[
+                    month_selected] + ", renouvellez votre choix.")
 
                 return render(request, 'spent/history.html', {'outlay': useroutlay,
                                                               'mois': mois,
@@ -94,20 +97,22 @@ def history(request):
 def history_categories_view(request, month_selected):
     """shows total amount by categories"""
 
-    mois = {'01': 'Janvier', '02': 'Février', '03': 'Mars', '04': 'Avril', '05': 'Mai', '06': 'Juin',
-            '07': 'Juillet', '08': 'Août', '09': 'Septembre', '10': 'Octobre', '11': 'Novembre', '12': 'Décembre'}
+    mois = {'01': 'Janvier', '02': 'Février', '03': 'Mars',
+            '04': 'Avril', '05': 'Mai', '06': 'Juin',
+            '07': 'Juillet', '08': 'Août', '09': 'Septembre',
+            '10': 'Octobre', '11': 'Novembre', '12': 'Décembre'}
 
     mois = mois[month_selected]
     date = datetime.datetime.now()
 
     user_outlaymonth = UserOutlay.objects.filter(user_name=request.user,
                                                  payment_date__month=month_selected) \
-                                         .distinct("outlay__category")
+        .distinct("outlay__category")
     data = {}
     for categories in user_outlaymonth:
         categories_amount = UserOutlay.objects.filter(user_name=request.user,
                                                       payment_date__month=month_selected,
-                                                      outlay__category__name=categories.outlay.category.name)\
+                                                      outlay__category__name=categories.outlay.category.name) \
             .aggregate(category_amount=Sum('amount'))
         data[categories.outlay.category.name] = categories_amount['category_amount']
 
@@ -120,6 +125,7 @@ def history_categories_view(request, month_selected):
                                                              'month_selected': month_selected,
                                                              'date': date,
                                                              'mois': mois})
+
 
 @login_required
 def history_outlay_view(request, month_selected, category_name):
